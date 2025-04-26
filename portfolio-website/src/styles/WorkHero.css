@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap');
+
+.work-hero {
+  text-align: center;
+}
+
+.poster {
+  position: relative;
+  text-align: left;
+  padding: 150px 1rem 0rem;
+  overflow: hidden;
+}
+
+/* Gradient Glow */
+.poster::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: min(100%, 400px);
+  height: min(100%, 400px);
+  background: linear-gradient(135deg, rgba(255, 253, 253, 0.08), #fff0 60%),
+    radial-gradient(circle at 80% 150%, rgba(255, 153, 97, 0.25), #0000 60%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Content */
+.work-title {
+  font-family: 'Urbanist', sans-serif;
+  color: #e86a33;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.work-heading {
+  font-family: 'Urbanist', sans-serif;
+  font-size: clamp(2rem, 6vw, 3.625rem);
+  font-weight: 600;
+  color: #000;
+  line-height: 1.2;
+  margin: 0.5rem 0;
+}
+
+.work-heading br {
+  display: none;
+}
+
+.work-filters {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  font-family: 'Urbanist', sans-serif;
+  background: none;
+  border: none;
+  font-size: clamp(0.875rem, 3vw, 1.125rem);
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  color: #666;
+  border-bottom: 2px solid transparent;
+  font-weight: 400;
+  transition: all 0.2s ease;
+}
+
+.filter-btn.active {
+  color: #e86a33;
+  border-bottom: 2px solid #e86a33;
+}
+
+/* Work Cards Grid */
+.work-cards {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.25rem;
+  padding: 1rem;
+  background-color: #F9F9F9;
+  ;
+}
+
+/* View More Button */
+.view-more-button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: none;
+  border: none;
+  font-family: 'Urbanist', sans-serif;
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.arrow-circle {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.view-more-button:hover {
+  color: #e86a33;
+}
+
+.view-more-button:hover .arrow-circle {
+  background: #e86a33;
+  color: white;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  .poster {
+    padding: 250px 8% 0rem;
+  }
+
+  .work-heading br {
+    display: block;
+  }
+
+  .work-filters {
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .work-cards {
+    padding: 2rem 8%;
+    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .filter-btn {
+    padding: 0.625rem 1rem;
+    border-bottom-width: 3px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .work-heading {
+    max-width: 1000px;
+  }
+}
+
+.bg-gray {
+  background-color: #F9F9F9;
+}
+
+@media (max-width: 768px) {
+
+  .work-cards {
+    background-color: #fff;
+  }
+
+  .bg-gray {
+    background-color: #fff;
+  }
+
+  .work-heading {
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 44px;
+    letter-spacing: 0%;
+  }
+}
+
+.mob-btn-work{
+  padding-bottom: 100px !important;
+}

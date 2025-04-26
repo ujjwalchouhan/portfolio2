@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@500;600;700&display=swap');
+
+.about-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 200px 5% 0% 3%;
+  gap: 5%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.about-container::after {
+  content: "";
+  position: absolute;
+  bottom: -140%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle, rgba(255, 183, 164, 0.6) 0%, rgba(255, 255, 255, 1) 80%);
+  border-radius: 50%;
+  filter: blur(150px);
+  z-index: -1;
+}
+
+.about-hero {
+  position: relative;
+  width: 100%;
+  text-align: left;
+  z-index: 1;
+  padding-bottom: 5%;
+}
+
+/* Typography - Mobile First */
+.about-title {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #F5581E;
+  margin-bottom: 0.5rem;
+}
+
+.about-name {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #272727;
+  margin-bottom: 0.25rem;
+  line-height: 1.2;
+}
+
+.about-role {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: rgba(18, 22, 36, 0.8);
+  margin-bottom: 1rem;
+}
+
+.about-description {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 33px;
+  color: #121624;
+  margin-bottom: 1.5rem;
+}
+
+/* Working Status */
+.working-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: 'Urbanist', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #121624;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.status-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(97, 208, 29, 0.3);
+  border-radius: 50%;
+}
+
+.verified-icon {
+  color: #61D01D;
+  font-size: 1.375rem;
+}
+
+/* Resume Button */
+.resume-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(145deg, #f5581e, #ff763f);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 2rem;
+  padding: 0 1.5rem;
+  height: 3rem;
+  cursor: pointer;
+}
+
+.resume-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(245, 88, 30, 0.35);
+}
+
+.download-icon {
+  background: white;
+  border-radius: 50%;
+  padding: 0.25rem;
+  width: 2rem;
+  height: 2rem;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+/* Vertical Slider Container - Hidden on Mobile */
+.verti-cntr {
+  display: none;
+}
+
+/* Desktop Styles */
+@media (min-width: 768px) {
+  .about-container {
+    flex-direction: row;
+    padding: 200px 5% 0% 4%;
+  }
+  
+  .about-hero {
+    width: 60%;
+    padding-left: 5%;
+    padding-top: 150px;
+  }
+  
+  .verti-cntr {
+    display: block;
+    width: 40%;
+    height: auto;
+  }
+  
+  .about-title {
+    font-size: 1.75rem;
+  }
+  
+  .about-name {
+    font-size: 3.625rem;
+    line-height: 1.3;
+  }
+  
+  .about-role {
+    font-size: 1.375rem;
+  }
+  
+  .about-description {
+    font-size: 18px;
+    line-height: 36px;
+  }
+  
+  .resume-button {
+    width: 10rem;
+    height: 3.75rem;
+  }
+}

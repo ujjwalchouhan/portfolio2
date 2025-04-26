@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@500;600;700&display=swap');
+
+.hero-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background: #fff;
+  /* padding: 0 clamp(1.5rem, 8%, 8rem) !important; */
+  padding-top: 250px !important;
+  overflow: hidden;  overflow: hidden;
+}
+
+.hero-content {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Subtitle */
+.hero-subtitle {
+  font-family: "Urbanist", sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.25rem, 3vw, 1.75rem) !important;
+  line-height: 1.5;
+  color: #F5581E;
+  margin-bottom: 0.5rem;
+}
+
+/* Main Title */
+.hero-title {
+  font-family: "Urbanist", sans-serif;
+  font-weight: 600;
+  font-size: clamp(2rem, 7vw, 4.75rem) !important;
+  line-height: 1.1;
+  color: #0E1015;
+  max-width: 960px;
+  margin: 0.5rem 0;
+}
+
+.hero-scroll {
+  margin-top: 3rem;
+  width: clamp(4rem, 10vw, 6.25rem) !important;
+  height: clamp(4rem, 10vw, 6.25rem) !important;
+  background: linear-gradient(145deg, #f96d36, #ff3c00);
+  display: flex;
+  align-items: center ;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(245, 88, 30, 0.4), 
+              inset 0 6px 8px rgba(255, 255, 255, 0.25);
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-scroll:hover {
+  transform: translateY(5px);
+}
+
+.hero-scroll .border-icon {
+  width: 60%;
+  height: 60%;
+}
+
+.hero-scroll .arrow-icon {
+  position: absolute;
+  width: 35%;
+  height: 35%;
+}
+
+.hero-glow-bg {
+  position: absolute;
+  top: 160%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgb(249, 184, 160) 0%, rgb(255, 255, 255) 80%);
+  border-radius: 50%;
+  filter: blur(150px);
+  z-index: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero-container {
+    padding-top: 15vh;
+  }
+  
+  .hero-title {
+    margin: 0.75rem 0;
+    line-height: 44px;
+  }
+    
+  .hero-scroll {
+    margin-bottom: 5rem !important;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-container {
+    padding-top: 20vh !important;
+    text-align: left;
+    align-items: center;
+  }
+  
+  .hero-title br {
+    display: none;
+  }
+}

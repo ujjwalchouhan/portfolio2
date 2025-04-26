@@ -1,0 +1,41 @@
+.App {
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: #F9F9F9;
+  overscroll-behavior: none !important;
+}
+/* src/layouts/MainLayout.css */
+.main-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1; 
+  padding: 20px;
+}
+
+.app-header {
+  background: #333;
+  color: white;
+  padding: 1rem;
+}
+
+.app-header nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.app-header a {
+  color: white;
+  text-decoration: none;
+}
+
+.app-footer {
+  background: #333;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}

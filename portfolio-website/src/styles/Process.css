@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@100;300;400;500;600;700;800;900&display=swap');
+
+.process-container {
+    text-align: center;
+    padding: 90px 20px 30px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.main-heading {
+    font-size: 28px;
+    font-weight: 500;
+    color: #F5581E;
+    margin-bottom: 10px;
+    font-family: 'Urbanist', sans-serif;
+    line-height: 44px;
+    justify-content: left;
+    display: flex;
+    position: relative;
+}
+
+.process-title {
+    font-size: 58px;
+    font-weight: 600;
+    color: #0E1015;
+    margin-bottom: 30px;
+    line-height: 77px;
+    justify-content: left;
+    display: flex;
+    position: relative;
+    text-align: left;
+    font-family: 'Urbanist', sans-serif;
+}
+
+.process-steps {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .process-steps {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+.process-card {
+    background: #F9F9F9;
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 387px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    backdrop-filter: blur(10px);
+    height: 328px;
+}
+
+.process-icon {
+    font-size: 2.5rem;
+    color: #F5581E;
+    margin-bottom: 15px;
+}
+
+.step-title {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-family: 'Urbanist', sans-serif;
+}
+
+.step-description {
+    font-family: 'Urbanist', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #272727;
+    line-height: 32px;
+}
+
+@media (max-width: 768px) {
+
+    .process-title {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 38px;
+        letter-spacing: 0%;
+    }
+
+    .main-heading {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: 0%;
+
+    }
+}
