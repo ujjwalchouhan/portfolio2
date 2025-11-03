@@ -1,0 +1,374 @@
+.key-solutions-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    width: 100%;
+}
+
+.solution-card {
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.solution-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.solution-title {
+    font-family: 'Urbanist', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 32px;
+    color: #121624;
+    margin: 0;
+}
+
+.solution-description {
+    font-family: 'Urbanist', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    color: #121624;
+    margin: 0;
+}
+
+.solution-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.solution-item {
+    font-family: 'Urbanist', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 29px;
+    color: #121624;
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+.solution-item:last-child {
+    margin-bottom: 0;
+}
+
+.solution-item::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #FF7A00;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 29px;
+}
+
+/* Responsive Design - Aligned with Project.css pattern */
+
+/* Large Desktop Screens (1400px and up) */
+@media (min-width: 1400px) {
+    .key-solutions-section {
+        gap: 50px;
+    }
+
+    .solutions-grid {
+        gap: 32px;
+    }
+
+    .solution-card {
+        padding: 30px;
+        border-radius: 24px;
+        gap: 13px;
+    }
+
+    .solution-title {
+        font-size: 20px;
+        line-height: 32px;
+        font-weight: 700;
+    }
+
+    .solution-description {
+        font-size: 20px;
+        line-height: 32px;
+    }
+
+    .solution-item {
+        font-size: 16px;
+        line-height: 29px;
+    }
+
+    .solution-item::before {
+        font-size: 16px;
+        line-height: 29px;
+    }
+}
+
+/* Desktop Screens (1200px to 1399px) */
+@media (max-width: 1399px) and (min-width: 1200px) {
+    .key-solutions-section {
+        gap: 40px;
+    }
+
+    .solutions-grid {
+        gap: 24px;
+    }
+
+    .solution-card {
+        padding: 30px;
+        border-radius: 24px;
+        gap: 13px;
+    }
+}
+
+/* Large Tablets (992px to 1199px) */
+@media (max-width: 1199px) and (min-width: 992px) {
+    .key-solutions-section {
+        gap: 35px;
+    }
+
+    .solutions-grid {
+        gap: 20px;
+    }
+
+    .solution-card {
+        padding: 26px;
+        border-radius: 20px;
+        gap: 12px;
+    }
+
+    .solution-title {
+        font-size: 19px;
+        line-height: 30px;
+        font-weight: 700;
+    }
+
+    .solution-description {
+        font-size: 18px;
+        line-height: 30px;
+    }
+
+    .solution-item {
+        font-size: 15px;
+        line-height: 27px;
+    }
+
+    .solution-item::before {
+        font-size: 15px;
+        line-height: 27px;
+    }
+}
+
+/* Tablets (768px to 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+    .key-solutions-section {
+        gap: 30px;
+    }
+
+    .solutions-grid {
+        gap: 18px;
+    }
+
+    .solution-card {
+        padding: 24px;
+        border-radius: 18px;
+        gap: 11px;
+    }
+
+    .solution-title {
+        font-size: 18px;
+        line-height: 28px;
+        font-weight: 700;
+    }
+
+    .solution-description {
+        font-size: 17px;
+        line-height: 28px;
+    }
+
+    .solution-item {
+        font-size: 14px;
+        line-height: 26px;
+    }
+
+    .solution-item::before {
+        font-size: 14px;
+        line-height: 26px;
+    }
+}
+
+/* Small Tablets and Large Phones (576px to 767px) */
+@media (max-width: 767px) and (min-width: 576px) {
+    .key-solutions-section {
+        gap: 25px;
+    }
+
+    .solutions-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .solution-card {
+        padding: 24px;
+        border-radius: 18px;
+        gap: 11px;
+    }
+
+    .solution-title {
+        font-size: 18px;
+        line-height: 28px;
+        font-weight: 700;
+    }
+
+    .solution-description {
+        font-size: 17px;
+        line-height: 28px;
+    }
+
+    .solution-item {
+        font-size: 14px;
+        line-height: 26px;
+    }
+
+    .solution-item::before {
+        font-size: 14px;
+        line-height: 26px;
+    }
+}
+
+/* Small Phones (481px to 575px) */
+@media (max-width: 575px) and (min-width: 481px) {
+    .key-solutions-section {
+        gap: 20px;
+    }
+
+    .solutions-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .solution-card {
+        padding: 20px;
+        border-radius: 16px;
+        gap: 10px;
+    }
+
+    .solution-title {
+        font-size: 17px;
+        line-height: 26px;
+        font-weight: 700;
+    }
+
+    .solution-description {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .solution-item {
+        font-size: 14px;
+        line-height: 24px;
+    }
+
+    .solution-item::before {
+        font-size: 14px;
+        line-height: 24px;
+    }
+}
+
+/* Extra Small Phones (max-width: 480px) */
+@media (max-width: 480px) {
+    .key-solutions-section {
+        gap: 20px;
+    }
+
+    .solutions-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .solution-card {
+        padding: 20px;
+        border-radius: 16px;
+        gap: 10px;
+    }
+
+    .solution-title {
+        font-size: 17px;
+        line-height: 26px;
+        font-weight: 700;
+    }
+
+    .solution-description {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .solution-item {
+        font-size: 14px;
+        line-height: 24px;
+    }
+
+    .solution-item::before {
+        font-size: 14px;
+        line-height: 24px;
+    }
+}
+
+/* Extra Small Phones (320px and below) */
+@media (max-width: 320px) {
+    .key-solutions-section {
+        gap: 16px;
+    }
+
+    .solutions-grid {
+        gap: 14px;
+    }
+
+    .solution-card {
+        padding: 16px;
+        border-radius: 14px;
+        gap: 9px;
+    }
+
+    .solution-title {
+        font-size: 15px;
+        line-height: 24px;
+        font-weight: 700;
+    }
+
+    .solution-description {
+        font-size: 14px;
+        line-height: 24px;
+    }
+
+    .solution-item {
+        font-size: 13px;
+        line-height: 22px;
+    }
+
+    .solution-item::before {
+        font-size: 13px;
+        line-height: 22px;
+    }
+}

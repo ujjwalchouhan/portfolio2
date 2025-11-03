@@ -10,7 +10,8 @@
   background: #fff;
   /* padding: 0 clamp(1.5rem, 8%, 8rem) !important; */
   padding-top: 250px !important;
-  overflow: hidden;  overflow: hidden;
+  overflow: hidden;
+  overflow: hidden;
 }
 
 .hero-content {
@@ -45,12 +46,12 @@
   height: clamp(4rem, 10vw, 6.25rem) !important;
   background: linear-gradient(145deg, #f96d36, #ff3c00);
   display: flex;
-  align-items: center ;
+  align-items: center;
   justify-content: center;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(245, 88, 30, 0.4), 
-              inset 0 6px 8px rgba(255, 255, 255, 0.25);
+  box-shadow: 0 10px 20px rgba(245, 88, 30, 0.4),
+    inset 0 6px 8px rgba(255, 255, 255, 0.25);
   margin-bottom: 4rem;
   position: relative;
   z-index: 1;
@@ -63,6 +64,20 @@
 .hero-scroll .border-icon {
   width: 60%;
   height: 60%;
+}
+
+.border-icon {
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .hero-scroll .arrow-icon {
@@ -89,12 +104,12 @@
   .hero-container {
     padding-top: 15vh;
   }
-  
+
   .hero-title {
     margin: 0.75rem 0;
     line-height: 44px;
   }
-    
+
   .hero-scroll {
     margin-bottom: 5rem !important;
     margin-top: 1rem;
@@ -103,11 +118,11 @@
 
 @media (max-width: 480px) {
   .hero-container {
-    padding-top: 20vh !important;
+    padding-top: 30vh !important;
     text-align: left;
     align-items: center;
   }
-  
+
   .hero-title br {
     display: none;
   }

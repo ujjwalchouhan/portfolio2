@@ -17,7 +17,7 @@ const ImageScroller = () => {
   // Configuration - adjust these values as needed
   const IMAGE_COUNT = 10; // Number of unique images
   const DUPLICATION_FACTOR = 4; // How many times to duplicate the set
-  const TARGET_SPEED = 360; // DOUBLED from 180 to 360 pixels per second
+  const TARGET_SPEED = 100; // DOUBLED from 180 to 360 pixels per second
   const IMAGE_WIDTH = 300; // px
   const IMAGE_GAP = 10; // px
 

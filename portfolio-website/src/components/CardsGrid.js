@@ -5,8 +5,8 @@ import { FiArrowUpRight } from "react-icons/fi";
 import "./../styles/CardsGrid.css";
 import project1 from "../assets/images/project7.png";
 import project2 from "../assets/images/project8.png";
-import project3 from "../assets/images/project9.jpg";
-import project4 from "../assets/images/project10.png";
+import project10 from "../assets/images/project10.png";
+import project12 from "../assets/images/project12.png";
 import project5 from "../assets/images/project5.png";
 import project6 from "../assets/images/project6.png";
 import { motion } from "framer-motion";
@@ -15,39 +15,45 @@ import { useInView } from "react-intersection-observer";
 const allCardsData = [
   {
     image: project1,
-    category: "Strom Lake Capital",
-    title: "Redesign Website for SLC",
-    tags: ["Web & Mobile", "UX/UI Design", "Booking Application"],
+    category: "My Loan",
+    title: "Compare loan offers easily and apply quickly with trusted lenders.",
+    tags: ["Web & Mobile", "UX/UI Design", "Loan Comparison"],
+    path: "MYLONE",
   },
   {
     image: project2,
-    category: "My Loan",
-    title: "Be Smart - Compare Loan Offers",
-    tags: ["Web & Mobile", "UX/UI Design", "Fintech"],
-  },
-  {
-    image: project3,
-    category: "Pepsi",
-    title: "Unlock Your Business Growth Potential",
-    tags: ["Marketing", "UX/UI Design", "Web Development"],
-  },
-  {
-    image: project4,
     category: "Kaashin",
-    title: "A Gateway to Timeless Peace",
-    tags: ["Branding", "UI Design", "Web & Mobile"],
+    title: "Brand identity that embodies Varanasi's serene essence ",
+    tags: ["Logo", "UX/UI Design", "Hospitality"],
+    path: "KAASHIN",
+  },
+  {
+    image: project12,
+    category: "Aucto Seller Mobile App",
+    title: "Empowering Industrial Sellers to Manage Auctions on the Go",
+    tags: ["Mobile", "UX/UI Design", "Auction and Seller app"],
+    path: "AUCTOSELLERAPP",
+  },
+  {
+    image: project10,
+    category: "EL Riad Shrine",
+    title: "Designed Ticket Booking Experience for Their Event Halls",
+    tags: ["Web & Mobile", "Design Ticket Booking Experience", "UI/UX Designer"],
+    path: "ELRIADSHRINE",
   },
   {
     image: project5,
     category: "FinancePro",
     title: "Fintech Dashboard Design",
     tags: ["Finance", "UX/UI Design", "Web App"],
+    path: "FINANCEPRO",
   },
   {
     image: project6,
     category: "E-CommerceX",
     title: "Modern E-Commerce UI/UX",
     tags: ["E-Commerce", "UX/UI Design", "Mobile App"],
+    path: "ECOMMERCEX",
   },
 ];
 
@@ -75,6 +81,7 @@ const CardsGrid = () => {
               category={card.category}
               title={card.title}
               tags={card.tags}
+              path={card.path}
             />
           ))}
         </div>

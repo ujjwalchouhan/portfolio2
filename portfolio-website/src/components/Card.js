@@ -2,17 +2,24 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import "./../styles/Card.css";
+import { useNavigate } from "react-router-dom";
 
-const Card = ({ image, category, title, tags }) => {
+const Card = ({ image, category, title, tags, path }) => {
+  const navigate = useNavigate();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.15,
   });
 
+  const handleClick = () => {
+    navigate(`/work/${path}`);
+  };
+
   return (
     <motion.div
       ref={ref}
       className="card"
+      onClick={handleClick}
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, ease: "easeOut" }}
