@@ -1,0 +1,163 @@
+/* Project Info Section Container */
+.project-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 50px;
+    width: 100%;
+}
+
+/* Individual Section */
+.project-info-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 54px;
+    width: 100%;
+}
+
+/* Section Content */
+.section-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Section Content Wrapper */
+.section-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 0px;
+    width: 100%;
+}
+
+/* Section Heading */
+.section-heading {
+    width: 100%;
+    height: 32px;
+    font-family: 'Urbanist', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 32px;
+    color: #121624;
+    margin: 0;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* Section Text */
+.section-text {
+    width: 100%;
+    font-family: 'Urbanist', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    color: #121624;
+    margin: 0;
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+/* Section Bullet List */
+.section-bullet-list {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: 'Urbanist', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    color: #121624;
+}
+
+/* Section Bullet Item */
+.section-bullet-item {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+}
+
+.section-bullet-item:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #121624;
+    font-weight: bold;
+}
+
+.section-bullet-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .project-info-container {
+        max-width: 100%;
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .project-info-container {
+        gap: 30px;
+    }
+
+    .project-info-section {
+        gap: 30px;
+    }
+
+    .section-content {
+        gap: 15px;
+    }
+
+    .section-heading {
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    .section-text {
+        font-size: 18px;
+        line-height: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-info-container {
+        padding: 0 15px;
+        gap: 25px;
+    }
+
+    .project-info-section {
+        gap: 25px;
+    }
+
+    .section-content {
+        gap: 12px;
+    }
+
+    .section-heading {
+        font-size: 18px;
+        line-height: 26px;
+    }
+
+    .section-text {
+        font-size: 16px;
+        line-height: 24px;
+    }
+}

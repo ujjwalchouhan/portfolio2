@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { LuDownload, LuMenu, LuX } from "react-icons/lu";
+import { LuDownload} from "react-icons/lu";
 import logo from "../assets/icons/logo.svg";
 import "./../styles/Header.css";
 
@@ -29,12 +29,12 @@ const Header = () => {
     <header className={`header grid-layout ${scrolled ? "scrolled" : ""}`}>
       <nav className="nav-container">
         {/* Logo Section */}
+        <NavLink to="/" className="logo-link">
         <div className="logo-container">
-          <NavLink to="/" className="logo-link">
             <img src={logo} alt="Logo" className="logo" />
-          </NavLink>
           <span className="brand-name">Abhay</span>
         </div>
+        </NavLink>
 
         {/* Desktop Navigation */}
         <div className="desktop-links">

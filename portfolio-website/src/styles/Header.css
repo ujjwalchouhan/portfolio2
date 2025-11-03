@@ -30,6 +30,10 @@
   height: 92px;
   transform: scale(0.95);
   animation: scaleUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s forwards;
+
+  /* a {
+    color: transparent !important;
+  } */
 }
 
 .logo-container {
@@ -293,6 +297,7 @@
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -304,6 +309,7 @@
     opacity: 0;
     transform: translateX(20px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -315,6 +321,7 @@
     opacity: 0;
     transform: translateX(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -326,6 +333,7 @@
     transform: scale(0.95);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
@@ -338,18 +346,18 @@
     padding: 12px 20px;
     height: 80px;
   }
-  
+
   .brand-name {
     font-size: 28px;
   }
-  
+
   .resume-btn {
     width: 140px;
     height: 50px;
     font-size: 16px;
     padding: 12px 3px 12px 20px;
   }
-  
+
   .download-icon-h {
     width: 36px;
     height: 36px;
@@ -361,7 +369,7 @@
   .desktop-links {
     display: none;
   }
-  
+
   .mobile-menu-btn {
     display: flex;
     align-items: center;
@@ -376,7 +384,7 @@
     position: relative;
     transition: all 0.3s ease;
   }
-  
+
   .menu-icon {
     position: relative;
     width: 20px;
@@ -387,7 +395,7 @@
   .menu-icon.open {
     right: 0px;
   }
-  
+
   .line {
     position: absolute;
     left: 0;
@@ -396,7 +404,7 @@
     border-radius: 1px;
     transition: all 0.3s ease;
   }
-  
+
   /* Positioning each line */
   .top-line {
     top: 25%;
@@ -404,28 +412,28 @@
     width: 58.33%;
     left: 41.67%;
   }
-  
+
   .middle-line-1 {
     top: 50%;
     transform: translateY(-50%);
     width: 83.33%;
     left: 16.67%;
   }
-  
+
   .middle-line-2 {
     top: 50%;
     transform: translateY(-50%);
     width: 54.16%;
     left: 29.17%;
   }
-  
+
   .bottom-line {
     top: 75%;
     transform: translateY(-50%);
     width: 58.33%;
     left: 16.67%;
   }
-  
+
   /* Animation to X when open */
   .menu-icon.open .top-line {
     transform: rotate(45deg);
@@ -433,26 +441,27 @@
     left: 20%;
     width: 60%;
   }
-  
+
   .menu-icon.open .middle-line-1 {
     opacity: 0;
   }
-  
+
   .menu-icon.open .middle-line-2 {
     opacity: 0;
   }
-  
+
   .menu-icon.open .bottom-line {
     transform: rotate(-45deg);
     top: 50%;
     left: 20%;
     width: 60%;
   }
-  
-  
+
+
   .nav-links {
     gap: 30px;
   }
+
   .nav-container {
     width: 100%;
     margin: 0px 1px 0px 1px;
@@ -464,20 +473,20 @@
     padding: 10px 16px;
     height: 66px;
   }
-  
+
   .brand-name {
     font-size: 24px;
   }
-  
+
   .logo {
     width: 28px;
     height: 28px;
   }
-  
+
   .mobile-nav-links {
     gap: 30px;
   }
-  
+
   .mobile-resume-btn {
     padding: 12px 24px;
     font-size: 16px;
@@ -511,15 +520,30 @@
 
 
 @media (min-width: 481px) {
-  .grid-layout{
+  .grid-layout {
     padding-left: 9% !important;
     padding-right: 9% !important;
   }
 }
 
 @media (max-width: 480px) {
-  .grid-layout{
+  .grid-layout {
     padding-left: 3% !important;
     padding-right: 3% !important;
   }
+}
+
+.logo-link {
+  text-decoration: none;
+  outline: none;
+  border: none;
+  color: inherit;
+}
+
+.logo-link:focus,
+.logo-link:active,
+.logo-link:visited {
+  text-decoration: none;
+  outline: none;
+  border: none;
 }
