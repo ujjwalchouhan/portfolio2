@@ -11,11 +11,9 @@ const MainLayout = ({ children }) => {
   useEffect(() => {
     // Scroll the main-layout div (which has overflow-y: scroll)
     if (mainLayoutRef.current) {
-      console.log("Scroll position BEFORE: ", mainLayoutRef.current.scrollTop);
       mainLayoutRef.current.scrollTop = 0;
 
       setTimeout(() => {
-        console.log("Scroll position AFTER: ", mainLayoutRef.current.scrollTop);
       }, 100);
     }
 

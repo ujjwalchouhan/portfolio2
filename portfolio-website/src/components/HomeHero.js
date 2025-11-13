@@ -41,19 +41,19 @@ const HomeHero = () => {
       </div>
 
 
-      <div class="w-100">
-      <motion.div
-        className="hero-scroll"
-        variants={fadeUp}
-        initial="hidden"
-        animate="visible"
-        custom={2}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <img className="border-icon" src={whiteBorder} alt="Scroll Down" />
-        <img className="arrow-icon" src={arrowIcon} alt="Scroll Down" />
-      </motion.div>
+      <div className="w-100">
+        <motion.div
+          className="hero-scroll"
+          variants={fadeUp}
+          initial="hidden"
+          animate="visible"
+          custom={2}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <img className="border-icon" src={whiteBorder} alt="Scroll Down" />
+          <img className="arrow-icon" src={arrowIcon} alt="Scroll Down" />
+        </motion.div>
       </div>
     </section>
   );
