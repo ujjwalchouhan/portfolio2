@@ -120,7 +120,8 @@
 .download-icon {
   background: white;
   border-radius: 50%;
-  padding: 0.25rem;
+  padding-left: 8px;
+  padding-top: 2px;
   width: 2rem;
   height: 2rem;
   color: black;

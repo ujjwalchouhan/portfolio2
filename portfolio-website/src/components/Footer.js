@@ -6,7 +6,7 @@ import starIcon from "../assets/icons/orange-pointer.svg";
 import { GoDotFill } from "react-icons/go";
 
 const Footer = () => {
-    const email = "Abhaychouhan24.designs@gmail.com";
+    const email = "abhaychouhan24.designs@gmail.com";
     const [tooltipVisible, setTooltipVisible] = useState(false);
     const [rotation, setRotation] = useState(0);
     const lastScrollY = useRef(0); // 👈 Correct way to store previous scroll position

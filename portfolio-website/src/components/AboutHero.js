@@ -60,7 +60,7 @@ const AboutHero = () => {
                 </motion.h3>
 
                 <motion.p className="about-description" variants={itemVariants}>
-                    Dynamic and creative UI Designer with 4+ years of experience in designing engaging,
+                    Dynamic and creative UI Designer with 5+ years of experience in designing engaging,
                     innovative, and responsive interfaces for web and mobile applications. Proficient
                     in using industry-standard designing software tools and techniques. Recognized for
                     delivering creative solutions that meet customer needs while driving engagement,
@@ -76,7 +76,9 @@ const AboutHero = () => {
                     </span>
                 </motion.div>
 
-                <motion.button
+                <motion.a
+                    href="/resume.pdf"
+                    download
                     className="resume-button"
                     variants={itemVariants}
                     whileHover={{ scale: 1.05 }}
@@ -86,7 +88,7 @@ const AboutHero = () => {
                     <div className="download-icon">
                         <LuDownload className="downl-icon" />
                     </div>
-                </motion.button>
+                </motion.a>
             </motion.section>
 
             <div className="verti-cntr" style={{ height: `${sectionHeight}px` }}>
