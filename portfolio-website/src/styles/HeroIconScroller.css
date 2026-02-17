@@ -1,0 +1,115 @@
+/* Icon row: 60–70% width, centered, for minimal aesthetic */
+.hero-icon-scroller {
+  position: absolute;
+  left: 50%;
+  bottom: 64px;
+  transform: translateX(-50%);
+  width: 65%;
+  max-width: min(900px, 70vw);
+  min-width: min(320px, 90vw);
+  height: 76px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  padding: 0 20px;
+}
+
+.hero-icon-scroller-track {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-shrink: 0;
+  animation: hero-icon-scroll 40s linear infinite;
+  will-change: transform;
+}
+
+.hero-icon-scroller-track:hover {
+  animation-play-state: paused;
+}
+
+/* One full set of icons – duplicate this for seamless loop */
+.hero-icon-scroller-set {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+  flex-shrink: 0;
+  padding: 0 20px;
+}
+
+/* Frame – 60×60 glass tile */
+.hero-icon-scroller-item {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8.57143px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.hero-icon-scroller-icon {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
+
+.hero-icon-scroller-fallback {
+  font-family: "Urbanist", sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Move by exactly one set width so loop is seamless */
+@keyframes hero-icon-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-icon-scroller {
+    bottom: 48px;
+    width: 70%;
+    max-width: 85vw;
+    height: 64px;
+    padding: 0 16px;
+  }
+
+  .hero-icon-scroller-set {
+    gap: 20px;
+    padding: 0 12px;
+  }
+
+  .hero-icon-scroller-item {
+    width: 52px;
+    height: 52px;
+    border-radius: 7px;
+  }
+
+  .hero-icon-scroller-icon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-icon-scroller {
+    bottom: 40px;
+    width: 85%;
+    max-width: 92vw;
+    height: 60px;
+    padding: 0 12px;
+  }
+}

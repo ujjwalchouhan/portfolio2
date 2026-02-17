@@ -1,75 +1,112 @@
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap');
 
 .work-hero {
-  text-align: center;
+  font-family: 'Urbanist', sans-serif;
 }
 
-.poster {
+/* Hero header: gradient background, ~390px height */
+.work-hero-header {
   position: relative;
-  text-align: left;
-  padding: 150px 1rem 0rem;
+  width: 100%;
+  min-height: 390px;
+  left: 0;
+  top: 0;
+  background: linear-gradient(170.1deg, #111111 7.43%, #0e1015 96.62%);
   overflow: hidden;
 }
 
-/* Gradient Glow */
-.poster::after {
-  content: "";
+/* Ellipse 7 - top blur orb */
+.work-hero-ellipse--top {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  width: min(100%, 400px);
-  height: min(100%, 400px);
-  background: linear-gradient(135deg, rgba(255, 253, 253, 0.08), #fff0 60%),
-    radial-gradient(circle at 80% 150%, rgba(255, 153, 97, 0.25), #0000 60%);
-  z-index: -1;
+  width: min(1193px, 83vw);
+  height: 335px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -264px;
+  background: linear-gradient(139.52deg, #2841bc 23.02%, #ff8204 86.13%);
+  opacity: 0.4;
+  filter: blur(107px);
   pointer-events: none;
 }
 
-/* Content */
-.work-title {
-  font-family: 'Urbanist', sans-serif;
-  color: #e86a33;
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
-  font-weight: 500;
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
+/* Ellipse 6 - bottom blur orb */
+.work-hero-ellipse--bottom {
+  position: absolute;
+  width: min(792px, 55vw);
+  height: 133px;
+  left: calc(50% - 792px / 2 + 146px);
+  bottom: -166px;
+  background: linear-gradient(139.52deg, #2841bc 23.02%, #ff8204 86.13%);
+  opacity: 0.4;
+  filter: blur(107px);
+  pointer-events: none;
 }
 
-.work-heading {
-  font-family: 'Urbanist', sans-serif;
-  font-size: clamp(2rem, 6vw, 3.625rem);
-  font-weight: 600;
-  color: #000;
-  line-height: 1.2;
-  margin: 0.5rem 0;
-}
-
-.work-heading br {
-  display: none;
-}
-
-.work-filters {
+/* Frame 20: flex column, gap 30px */
+.work-hero-frame {
+  position: absolute;
   display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  left: 135px;
+  top: 192px;
+  right: 24px;
+  max-width: 787px;
 }
 
-.filter-btn {
-  font-family: 'Urbanist', sans-serif;
-  background: none;
+/* Frame 1000015188: row with back button + Work */
+.work-hero-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Component 4: circular back button */
+.work-hero-back {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(18, 22, 36, 0.4);
   border: none;
-  font-size: clamp(0.875rem, 3vw, 1.125rem);
+  border-radius: 83px;
   cursor: pointer;
-  padding: 0.5rem 0.75rem;
-  color: #666;
-  border-bottom: 2px solid transparent;
-  font-weight: 400;
-  transition: all 0.2s ease;
+  color: rgba(255, 255, 255, 0.9);
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
-.filter-btn.active {
-  color: #e86a33;
-  border-bottom: 2px solid #e86a33;
+.work-hero-back:hover {
+  background: rgba(18, 22, 36, 0.6);
+  color: #fff;
+}
+
+.work-hero-back-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Work label */
+.work-hero-label {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 44px;
+  color: #f5581e;
+}
+
+/* Explore my design work and process */
+.work-hero-heading {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 500;
+  font-size: 46px;
+  line-height: 58px;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  max-width: 787px;
 }
 
 /* Work Cards Grid */
@@ -78,8 +115,7 @@
   grid-template-columns: repeat(1, 1fr);
   gap: 1.25rem;
   padding: 1rem;
-  background-color: #F9F9F9;
-  ;
+  background-color: #f9f9f9;
 }
 
 /* View More Button */
@@ -117,44 +153,56 @@
   color: white;
 }
 
-/* Responsive Adjustments */
+.bg-gray {
+  background-color: #f9f9f9;
+}
+
+.mob-btn-work {
+  padding-bottom: 100px !important;
+}
+
+/* Responsive */
 @media (min-width: 768px) {
-  .poster {
-    padding: 250px 8% 0rem;
-  }
-
-  .work-heading br {
-    display: block;
-  }
-
-  .work-filters {
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-
   .work-cards {
     padding: 2rem 8%;
     gap: 1.5rem;
     grid-template-columns: repeat(2, 1fr) !important;
   }
-
-  .filter-btn {
-    padding: 0.625rem 1rem;
-    border-bottom-width: 3px;
-  }
 }
 
-@media (min-width: 1024px) {
-  .work-heading {
-    max-width: 1000px;
+@media (max-width: 1024px) {
+  .work-hero-frame {
+    left: 48px;
+    top: 160px;
   }
-}
 
-.bg-gray {
-  background-color: #F9F9F9;
+  .work-hero-heading {
+    font-size: 38px;
+    line-height: 1.25;
+  }
 }
 
 @media (max-width: 768px) {
+  .work-hero-header {
+    min-height: 320px;
+  }
+
+  .work-hero-frame {
+    left: 24px;
+    right: 24px;
+    top: 120px;
+    gap: 20px;
+  }
+
+  .work-hero-label {
+    font-size: 22px;
+    line-height: 1.4;
+  }
+
+  .work-hero-heading {
+    font-size: 28px;
+    line-height: 38px;
+  }
 
   .work-cards {
     background-color: #fff;
@@ -163,15 +211,11 @@
   .bg-gray {
     background-color: #fff;
   }
-
-  .work-heading {
-    font-weight: 600;
-    font-size: 32px;
-    line-height: 44px;
-    letter-spacing: 0%;
-  }
 }
 
-.mob-btn-work{
-  padding-bottom: 100px !important;
+@media (max-width: 480px) {
+  .work-hero-heading {
+    font-size: 24px;
+    line-height: 32px;
+  }
 }

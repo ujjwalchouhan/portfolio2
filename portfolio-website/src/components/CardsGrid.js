@@ -3,57 +3,38 @@ import { useNavigate } from "react-router-dom";
 import Card from "./Card";
 import { FiArrowUpRight } from "react-icons/fi";
 import "./../styles/CardsGrid.css";
-import project1 from "../assets/images/project7.png";
-import project2 from "../assets/images/project8.png";
-import project10 from "../assets/images/project10.png";
-import project12 from "../assets/images/project12.png";
-import project5 from "../assets/images/project5.png";
-import project6 from "../assets/images/project6.png";
+import { MYLONE, KAASHIN, AUCTOSELLERAPP, ELRIADSHRINE } from "../data/projectContent";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const allCardsData = [
   {
-    image: project1,
-    category: "My Loan",
-    title: "Compare loan offers easily and apply quickly with trusted lenders.",
+    image: MYLONE.image,
+    category: MYLONE.company,
+    title: MYLONE.title,
     tags: ["Web & Mobile", "UX/UI Design", "Loan Comparison"],
     path: "MYLONE",
   },
   {
-    image: project2,
-    category: "Kaashin",
-    title: "Brand identity that embodies Varanasi's serene essence ",
+    image: KAASHIN.image,
+    category: KAASHIN.company,
+    title: KAASHIN.title,
     tags: ["Logo", "UX/UI Design", "Hospitality"],
     path: "KAASHIN",
   },
   {
-    image: project12,
-    category: "Aucto Seller Mobile App",
-    title: "Empowering Industrial Sellers to Manage Auctions on the Go",
+    image: AUCTOSELLERAPP.image,
+    category: AUCTOSELLERAPP.company,
+    title: AUCTOSELLERAPP.title,
     tags: ["Mobile", "UX/UI Design", "Auction and Seller app"],
     path: "AUCTOSELLERAPP",
   },
   {
-    image: project10,
-    category: "EL Riad Shrine",
-    title: "Designed Ticket Booking Experience for Their Event Halls",
+    image: ELRIADSHRINE.image,
+    category: ELRIADSHRINE.company,
+    title: ELRIADSHRINE.title,
     tags: ["Web & Mobile", "Design Ticket Booking Experience", "UI/UX Designer"],
     path: "ELRIADSHRINE",
-  },
-  {
-    image: project5,
-    category: "FinancePro",
-    title: "Fintech Dashboard Design",
-    tags: ["Finance", "UX/UI Design", "Web App"],
-    path: "FINANCEPRO",
-  },
-  {
-    image: project6,
-    category: "E-CommerceX",
-    title: "Modern E-Commerce UI/UX",
-    tags: ["E-Commerce", "UX/UI Design", "Mobile App"],
-    path: "ECOMMERCEX",
   },
 ];
 
@@ -72,11 +53,16 @@ const CardsGrid = () => {
 
   return (
     <div className="justify-content-center grid-body">
-      <div>
-        <div className="cards-grid grid-layout">
-          {allCardsData.slice(0, 6).map((card, index) => (
+      <div className="works-section grid-layout">
+        <header className="works-heading">
+          <span className="works-label">Works</span>
+          <h2 className="works-title">Explore my design work and process</h2>
+        </header>
+
+        <div className="cards-grid">
+          {allCardsData.map((card) => (
             <Card
-              key={index}
+              key={card.path}
               image={card.image}
               category={card.category}
               title={card.title}

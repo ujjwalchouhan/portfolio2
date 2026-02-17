@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { LuDownload } from "react-icons/lu";
+import HeroIconScroller from "./HeroIconScroller";
 import "./../styles/HomeHero.css";
-import arrowIcon from '../assets/icons/arrow-icon.svg';
-import whiteBorder from '../assets/icons/white-arrow-border.svg';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -16,45 +17,50 @@ const fadeUp = {
 const HomeHero = () => {
   return (
     <section className="hero-container grid-layout">
-      <div className="hero-glow-bg"></div>
+      <div className="hero-glow-bg hero-glow-bg-top" aria-hidden="true"></div>
+      <div className="hero-glow-bg hero-glow-bg-bottom" aria-hidden="true"></div>
 
-      <div className="hero-content">
-        <motion.p
-          className="hero-subtitle"
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={0}
-        >
-          Hi! I'm Abhay Chouhan
-        </motion.p>
+      <div className="hero-main">
+        <div className="hero-content">
+          <motion.h1 className="hero-title" variants={fadeUp} initial="hidden" animate="visible" custom={0}>
+            <span className="hero-title-line1">
+              <span className="hero-title-hey">Hey,</span>
+              <span className="hero-title-name"> I'm Abhay.</span>
+            </span>
+            <span className="hero-title-main">AI-Driven UI/UX Designer</span>
+          </motion.h1>
 
-        <motion.h1
-          className="hero-title"
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={1}
-        >
-          A Digital Designer from India turning your ideas into pixel-perfect realities
-        </motion.h1>
-      </div>
+          <motion.p
+            className="hero-description"
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={1}
+          >
+            I design intuitive, AI-powered digital experiences that simplify complex problems and drive meaningful user adoption.
+          </motion.p>
+        </div>
 
-
-      <div className="w-100">
         <motion.div
-          className="hero-scroll"
+          className="hero-cta"
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={2}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
         >
-          <img className="border-icon" src={whiteBorder} alt="Scroll Down" />
-          <img className="arrow-icon" src={arrowIcon} alt="Scroll Down" />
+          <Link to="/work" className="hero-btn hero-btn-view">
+            View work
+          </Link>
+          <a href="/resume.pdf" download className="hero-btn hero-btn-resume">
+            <span className="hero-btn-resume-text">Resume</span>
+            <span className="hero-btn-download-icon">
+              <LuDownload size={18} />
+            </span>
+          </a>
         </motion.div>
       </div>
+
+      <HeroIconScroller />
     </section>
   );
 };

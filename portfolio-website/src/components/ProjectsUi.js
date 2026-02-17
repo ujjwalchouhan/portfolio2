@@ -1,7 +1,7 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import "./../styles/Project.css";
-import { ReactComponent as GIcon } from "./../assets/icons/arrow-circle.svg";
+import { FiArrowLeft } from "react-icons/fi";
 import ProjectInfoSection from "./ProjectInfoSection";
 import HeadingImageList from "./HeadingImageList";
 import ImageScroller from "./ImageScroller";
@@ -20,6 +20,7 @@ const convertSlugToObjectName = (slug) => {
 
 const ProjectsUi = () => {
   const { name } = useParams();
+  const navigate = useNavigate();
 
   const objectName = name ? convertSlugToObjectName(name) : null;
 
@@ -31,48 +32,66 @@ const ProjectsUi = () => {
 
   return (
     <>
-      <div className="project-container">
+      {/* Project detail hero: dark gradient, back + breadcrumb, title, meta */}
+      <header className="project-detail-hero">
+        <div className="project-hero-ellipse project-hero-ellipse--top" aria-hidden="true" />
+        <div className="project-hero-ellipse project-hero-ellipse--bottom" aria-hidden="true" />
 
-        <div key={projects.id} className="project-card">
-
-
-          <button className="btn p-0 d-flex">
-            <GIcon className="g-icon" />
-          </button>
-
-          <div className="project-header">
-            <h3>
-              <span className="highlight">Work &gt;</span> {projects.company}
-            </h3>
-            <h1>{projects.title}</h1>
+        <div className="project-hero-frame">
+          <div className="project-hero-row">
+            <button
+              type="button"
+              className="project-hero-back"
+              onClick={() => navigate(-1)}
+              aria-label="Go back"
+            >
+              <FiArrowLeft className="project-hero-back-icon" />
+            </button>
+            <p className="project-hero-breadcrumb">
+              <Link to="/work" className="project-hero-breadcrumb-work">Work</Link>
+              <span className="project-hero-breadcrumb-sep"> &gt; </span>
+              <span className="project-hero-breadcrumb-project">{projects.company}</span>
+            </p>
           </div>
+          <h1 className="project-hero-title">{projects.title}</h1>
+        </div>
 
-          <div className="project-info-row">
-            <div className="info-block">
-              <p className="label">Platform</p>
-              <p className="value">{projects.platform}</p>
+        <div className="project-hero-meta">
+          <div className="project-meta-block">
+            <span className="project-meta-label">Platform</span>
+            <span className="project-meta-value">{projects.platform}</span>
+          </div>
+          <div className="project-meta-block">
+            <span className="project-meta-label">Service</span>
+            <span className="project-meta-value">{projects.service}</span>
+          </div>
+          <div className="project-meta-block">
+            <span className="project-meta-label">Role</span>
+            <span className="project-meta-value">{projects.role}</span>
+          </div>
+        </div>
+
+        <div className="project-browser-mockup">
+          <div className="project-browser-chrome">
+            <div className="project-browser-dots">
+              <span className="project-browser-dot" />
+              <span className="project-browser-dot" />
+              <span className="project-browser-dot" />
             </div>
-            <div className="info-block">
-              <p className="label">Service</p>
-              <p className="value">{projects.service}</p>
-            </div>
-            <div className="info-block">
-              <p className="label">Role</p>
-              <p className="value">{projects.role}</p>
+            <div className="project-browser-address">
+              <span className="project-browser-address-text">Search or enter website name</span>
             </div>
           </div>
-
-          <div
-          >
+          <div className="project-browser-content">
             <img
               src={projects.image}
               alt={projects.title}
-              className="project-image"
+              className="project-browser-image"
               loading="lazy"
             />
           </div>
         </div>
-      </div>
+      </header>
       <div className="project-container mt-0" style={{ backgroundColor: '#F9F9F9' }}>
         <div className="project-card">
 

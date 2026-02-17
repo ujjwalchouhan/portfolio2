@@ -30,10 +30,12 @@ const Header = () => {
       <nav className="nav-container">
         {/* Logo Section */}
         <NavLink to="/" className="logo-link">
-        <div className="logo-container">
-            <img src={logo} alt="Logo" className="logo" />
-          <span className="brand-name">Abhay</span>
-        </div>
+          <div className="logo-container">
+            <span className="logo-mark">
+              <img src={logo} alt="Abhay" className="logo" />
+            </span>
+            <span className="brand-name">Abhay</span>
+          </div>
         </NavLink>
 
         {/* Desktop Navigation */}
@@ -45,14 +47,6 @@ const Header = () => {
                 className={getNavLinkClass}
               >
                 Work
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/about"
-                className={getNavLinkClass}
-              >
-                About
               </NavLink>
             </li>
           </ul>
@@ -86,15 +80,6 @@ const Header = () => {
                   onClick={toggleMenu}
                 >
                   Work
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/about"
-                  className={getNavLinkClass}
-                  onClick={toggleMenu}
-                >
-                  About
                 </NavLink>
               </li>
               <li>

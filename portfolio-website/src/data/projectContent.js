@@ -113,47 +113,6 @@ export const ELRIADSHRINE = {
             image: elRiadImage10,
         }
     ]
-
-    // keySolutions: [
-    //     {
-    //         title: "1. Simplified Asset Listing Workflow",
-    //         description: "Sellers can now list assets in just a few guided steps:",
-    //         items: [
-    //             "Upload photos/videos directly from their mobile device",
-    //             "Add descriptions, categories, and compliance documentation",
-    //             "Set auction details such as start date, reserve price, and duration",
-    //             "Review and publish in one tap"
-    //         ]
-    //     },
-    //     {
-    //         title: "2. Real-Time Auction Monitoring",
-    //         description: "A dedicated auction dashboard shows:",
-    //         items: [
-    //             "Live bidding activity with real-time updates",
-    //             "Key stats like current bid, number of bidders, and time remaining",
-    //             "Actionable controls like 'Edit Auction' or 'Pause Bidding'"
-    //         ]
-    //     },
-    //     {
-    //         title: "3. Performance & Payout Analytics",
-    //         description: "A visually rich analytics screen helps sellers:",
-    //         items: [
-    //             "Track sales performance over time",
-    //             "Identify top-performing assets",
-    //             "View and download financial reports",
-    //             "Track upcoming payouts with estimated dates"
-    //         ]
-    //     },
-    //     {
-    //         title: "4. Document & Compliance Manager",
-    //         description: "Sellers can:",
-    //         items: [
-    //             "Upload, view, and manage certificates, manuals, or legal docs",
-    //             "Attach files directly to listings",
-    //             "Filter documents by asset, auction, or date"
-    //         ]
-    //     }
-    // ]
 };
 
 export const MYLONE = {

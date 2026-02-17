@@ -2,37 +2,16 @@ import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import "./../styles/ImageScroller.css";
-import project1 from "../assets/images/project1.png";
-import project2 from "../assets/images/project2.png";
-import project3 from "../assets/images/project3.png";
-import project4 from "../assets/images/project4.png";
-import project5 from "../assets/images/project5.png";
-import project6 from "../assets/images/project6.png";
-import project7 from "../assets/images/project7.png";
-import project8 from "../assets/images/project8.png";
-import project9 from "../assets/images/project9.jpg";
-import project10 from "../assets/images/project10.png";
+import { MYLONE, KAASHIN, AUCTOSELLERAPP, ELRIADSHRINE } from "../data/projectContent";
 
 const ImageScroller = () => {
-  // Configuration - adjust these values as needed
-  const IMAGE_COUNT = 10; // Number of unique images
-  const DUPLICATION_FACTOR = 4; // How many times to duplicate the set
-  const TARGET_SPEED = 100; // DOUBLED from 180 to 360 pixels per second
-  const IMAGE_WIDTH = 300; // px
-  const IMAGE_GAP = 10; // px
+  const IMAGE_COUNT = 4;
+  const DUPLICATION_FACTOR = 4;
+  const TARGET_SPEED = 100;
+  const IMAGE_WIDTH = 300;
+  const IMAGE_GAP = 10;
 
-  const images = [
-    project1,
-    project2,
-    project3,
-    project4,
-    project5,
-    project6,
-    project7,
-    project8,
-    project9,
-    project10
-  ];
+  const images = [MYLONE.image, KAASHIN.image, AUCTOSELLERAPP.image, ELRIADSHRINE.image];
   const scrollerRef = useRef(null);
   const animationRef = useRef(null);
   const scrollPosition = useRef(0);
