@@ -1,67 +1,51 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { LuDownload } from "react-icons/lu";
 import HeroIconScroller from "./HeroIconScroller";
-import "./../styles/HomeHero.css";
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.2, duration: 0.6, ease: "easeOut" }
-  })
-};
 
 const HomeHero = () => {
   return (
-    <section className="hero-container grid-layout">
-      <div className="hero-glow-bg hero-glow-bg-top" aria-hidden="true"></div>
-      <div className="hero-glow-bg hero-glow-bg-bottom" aria-hidden="true"></div>
-
-      <div className="hero-main">
-        <div className="hero-content">
-          <motion.h1 className="hero-title" variants={fadeUp} initial="hidden" animate="visible" custom={0}>
-            <span className="hero-title-line1">
-              <span className="hero-title-hey">Hey,</span>
-              <span className="hero-title-name"> I'm Abhay.</span>
-            </span>
-            <span className="hero-title-main">AI-Driven UI/UX Designer</span>
-          </motion.h1>
-
-          <motion.p
-            className="hero-description"
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={1}
+    <header className="relative min-h-screen flex flex-col items-center justify-center pt-20 pb-12 hero-gradient overflow-x-hidden overflow-y-visible">
+      <div className="container mx-auto px-6 text-center z-10 animate-fade-in-up">
+        <p className="text-xl md:text-2xl font-light text-gray-400 mb-4">
+          Hey, <span className="font-serif italic text-white">I&apos;m Abhay.</span>
+        </p>
+        <h1 className="text-5xl md:text-8xl font-serif mb-8 text-balance leading-tight">
+          AI-Driven UI/UX Designer
+        </h1>
+        <p className="max-w-xl mx-auto text-gray-400 text-lg md:text-xl mb-12 font-light">
+          I design intuitive, AI-powered digital experiences that simplify
+          complex problems and drive meaningful user adoption.
+        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Link
+            to="/#work"
+            className="px-10 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full font-medium transition-all text-inherit no-underline"
           >
-            I design intuitive, AI-powered digital experiences that simplify complex problems and drive meaningful user adoption.
-          </motion.p>
-        </div>
-
-        <motion.div
-          className="hero-cta"
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          custom={2}
-        >
-          <Link to="/work" className="hero-btn hero-btn-view">
             View work
           </Link>
-          <a href="/resume.pdf" download className="hero-btn hero-btn-resume">
-            <span className="hero-btn-resume-text">Resume</span>
-            <span className="hero-btn-download-icon">
-              <LuDownload size={18} />
-            </span>
+          <a
+            href="/resume.pdf"
+            download
+            className="px-10 py-4 bg-brand-accent hover:bg-orange-600 text-white rounded-full font-medium flex items-center gap-2 transition-all no-underline"
+          >
+            Resume
+            <svg
+              className="h-4 w-4"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clipRule="evenodd"
+                d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                fillRule="evenodd"
+              />
+            </svg>
           </a>
-        </motion.div>
+        </div>
       </div>
-
       <HeroIconScroller />
-    </section>
+    </header>
   );
 };
 

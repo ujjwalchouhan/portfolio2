@@ -1,100 +1,131 @@
-import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import { LuDownload} from "react-icons/lu";
-import logo from "../assets/icons/logo.svg";
-import "./../styles/Header.css";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import logo from "../assets/icons/logo.png";
+
+const NavLinks = ({ onNavigate }) => (
+  <>
+    <li>
+      <Link
+        className="hover:text-white transition-colors text-inherit no-underline"
+        to="/#work"
+        onClick={onNavigate}
+      >
+        Work
+      </Link>
+    </li>
+    <li>
+      <Link
+        className="hover:text-white transition-colors text-inherit no-underline"
+        to="/#about"
+        onClick={onNavigate}
+      >
+        About
+      </Link>
+    </li>
+    <li>
+      <Link
+        className="hover:text-white transition-colors text-inherit no-underline"
+        to="/#process"
+        onClick={onNavigate}
+      >
+        Process
+      </Link>
+    </li>
+  </>
+);
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-    document.body.style.overflow = isOpen ? "auto" : "hidden";
-  };
-
-  // Function to determine active class
-  const getNavLinkClass = ({ isActive }) =>
-    isActive ? "nav-link active-link" : "nav-link";
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className={`header grid-layout ${scrolled ? "scrolled" : ""}`}>
-      <nav className="nav-container">
-        {/* Logo Section */}
-        <NavLink to="/" className="logo-link">
-          <div className="logo-container">
-            <span className="logo-mark">
-              <img src={logo} alt="Abhay" className="logo" />
-            </span>
-            <span className="brand-name">Abhay</span>
-          </div>
-        </NavLink>
-
-        {/* Desktop Navigation */}
-        <div className="desktop-links">
-          <ul className="nav-links">
-            <li>
-              <NavLink
-                to="/work"
-                className={getNavLinkClass}
-              >
-                Work
-              </NavLink>
-            </li>
+    <nav
+      className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-4xl"
+      data-purpose="main-navigation"
+    >
+      <div className="glass-nav rounded-full px-6 py-3 flex items-center justify-between">
+        <Link to="/" className="flex items-center no-underline" aria-label="Home">
+          <img src={logo} alt="" className="w-10 h-10 object-contain"  style={{width: '100px'}}/>
+        </Link>
+        <ul className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+          <NavLinks onNavigate={undefined} />
+        </ul>
+        <div className="flex items-center gap-4">
+          <a
+            className="hidden md:flex bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full text-xs font-semibold items-center gap-2 transition-all text-inherit no-underline"
+            href="/resume.pdf"
+            download
+          >
+            Resume
+            <svg
+              className="h-3 w-3"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+              />
+            </svg>
+          </a>
+          <button
+            type="button"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="md:hidden p-2 text-white/80 hover:text-white"
+            aria-label="Toggle menu"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {mobileOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
+      {mobileOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 mt-2 glass-nav rounded-2xl p-6 flex flex-col gap-4">
+          <ul className="flex flex-col gap-4 text-sm font-medium text-gray-400">
+            <NavLinks onNavigate={() => setMobileOpen(false)} />
           </ul>
-          <a href="/resume.pdf" download className="resume-btn">
-            <span className="resume-text">Resume</span>
-            <span className="download-icon-h">
-              <LuDownload />
-            </span>
+          <a
+            className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full text-xs font-semibold flex items-center gap-2 transition-all text-inherit no-underline w-fit"
+            href="/resume.pdf"
+            download
+            onClick={() => setMobileOpen(false)}
+          >
+            Resume
+            <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+              />
+            </svg>
           </a>
         </div>
-
-        {/* Mobile Hamburger Menu */}
-        <button className="mobile-menu-btn" onClick={toggleMenu}>
-          <div className={`menu-icon ${isOpen ? 'open' : ''}`}>
-            <span className="line top-line"></span>
-            <span className="line middle-line-1"></span>
-            <span className="line middle-line-2"></span>
-            <span className="line bottom-line"></span>
-          </div>
-        </button>
-
-
-        {/* Mobile Menu Overlay */}
-        <div className={`mobile-menu-overlay ${isOpen ? "open" : ""}`}>
-          <div className="mobile-menu-content">
-            <ul className="mobile-nav-links">
-              <li>
-                <NavLink
-                  to="/work"
-                  className={getNavLinkClass}
-                  onClick={toggleMenu}
-                >
-                  Work
-                </NavLink>
-              </li>
-              <li>
-                <a href="/resume.pdf" download className="mobile-resume-btn" onClick={toggleMenu}>
-                  <span className="resume-text">Resume</span>
-                  <span className="download-icon-h">
-                    <LuDownload />
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
+      )}
+    </nav>
   );
 };
 

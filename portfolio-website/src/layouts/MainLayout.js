@@ -9,17 +9,16 @@ const MainLayout = ({ children }) => {
   const mainLayoutRef = useRef(null);
 
   useEffect(() => {
-    // Scroll the main-layout div (which has overflow-y: scroll)
-    if (mainLayoutRef.current) {
-      mainLayoutRef.current.scrollTop = 0;
-
-      setTimeout(() => {
-      }, 100);
+    const hash = location.hash?.replace("#", "");
+    if (hash && location.pathname === "/") {
+      const el = document.getElementById(hash);
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 100);
+        return;
+      }
     }
-
-    // Also scroll window just in case
     window.scrollTo(0, 0);
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
 
   return (
     <div className="main-layout" ref={mainLayoutRef}>

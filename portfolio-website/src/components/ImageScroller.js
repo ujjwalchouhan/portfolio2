@@ -1,17 +1,26 @@
 import React, { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import "./../styles/ImageScroller.css";
-import { MYLONE, KAASHIN, AUCTOSELLERAPP, ELRIADSHRINE } from "../data/projectContent";
+import {
+  ELRIADSHRINE,
+  AUCTOSELLERAPP,
+  PEPSI,
+  DINGG,
+} from "../data/projectContent";
+
+const PROJECTS = [
+  { ...ELRIADSHRINE, label: ELRIADSHRINE.platform },
+  { ...AUCTOSELLERAPP, label: AUCTOSELLERAPP.platform },
+  { ...PEPSI, label: PEPSI.platform },
+  { ...DINGG, label: DINGG.platform },
+];
 
 const ImageScroller = () => {
-  const IMAGE_COUNT = 4;
+  const CARD_WIDTH = 300;
+  const CARD_GAP = 24;
+  const PROJECT_COUNT = PROJECTS.length;
   const DUPLICATION_FACTOR = 4;
-  const TARGET_SPEED = 100;
-  const IMAGE_WIDTH = 300;
-  const IMAGE_GAP = 10;
+  const TARGET_SPEED = 60;
 
-  const images = [MYLONE.image, KAASHIN.image, AUCTOSELLERAPP.image, ELRIADSHRINE.image];
   const scrollerRef = useRef(null);
   const animationRef = useRef(null);
   const scrollPosition = useRef(0);
@@ -22,22 +31,9 @@ const ImageScroller = () => {
     threshold: 0.1,
   });
 
-  const variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut"
-      }
-    },
-  };
-
-  // Calculate speed multiplier based on conditions
   const getSpeedMultiplier = () => {
-    if (typeof window === 'undefined') return 1;
-    if (document.hidden) return 0.3; // Slow down when tab is inactive
+    if (typeof window === "undefined") return 1;
+    if (document.hidden) return 0.3;
     return 1;
   };
 
@@ -49,19 +45,19 @@ const ImageScroller = () => {
 
     scrollPosition.current = 0;
     lastTimeRef.current = null;
+    const step = PROJECT_COUNT * (CARD_WIDTH + CARD_GAP);
 
     const animate = (timestamp) => {
       if (!lastTimeRef.current) lastTimeRef.current = timestamp;
       const deltaTime = timestamp - lastTimeRef.current;
       lastTimeRef.current = timestamp;
 
-      // Calculate speed with multiplier (now using doubled TARGET_SPEED)
-      const speed = (TARGET_SPEED * deltaTime * getSpeedMultiplier()) / 1000;
+      const speed =
+        (TARGET_SPEED * deltaTime * getSpeedMultiplier()) / 1000;
       scrollPosition.current += speed;
 
-      // Reset position when scrolled one full set
-      if (scrollPosition.current >= IMAGE_COUNT * (IMAGE_WIDTH + IMAGE_GAP)) {
-        scrollPosition.current = 0;
+      if (scrollPosition.current >= step) {
+        scrollPosition.current -= step;
       }
 
       scroller.style.transform = `translateX(-${scrollPosition.current}px)`;
@@ -75,50 +71,65 @@ const ImageScroller = () => {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [inView, IMAGE_COUNT, IMAGE_WIDTH, IMAGE_GAP, TARGET_SPEED]);
+  }, [inView, PROJECT_COUNT, CARD_WIDTH, CARD_GAP, TARGET_SPEED]);
 
-  // Generate image elements with performance optimizations
-  const renderImages = () => {
-    const imageElements = [];
-    const totalImages = IMAGE_COUNT * DUPLICATION_FACTOR;
+  const renderCards = () => {
+    const elements = [];
+    const total = PROJECT_COUNT * DUPLICATION_FACTOR;
 
-    for (let i = 0; i < totalImages; i++) {
-      const imgIndex = i % IMAGE_COUNT;
-      imageElements.push(
+    for (let i = 0; i < total; i++) {
+      const project = PROJECTS[i % PROJECT_COUNT];
+      elements.push(
         <div
-          key={`img-${i}`}
-          className="scroller-item"
+          key={`card-${i}`}
+          className="flex-shrink-0 flex flex-col"
           style={{
-            width: `${IMAGE_WIDTH}px`,
-            marginRight: `${IMAGE_GAP}px`,
-            flexShrink: 0,
+            width: `${CARD_WIDTH}px`,
+            marginRight: `${CARD_GAP}px`,
           }}
         >
-          <img
-            src={images[imgIndex]}
-            alt=""
-            className="scroller-image"
-            loading="lazy"
-            decoding="async"
-          />
+          <div className="rounded-2xl overflow-hidden bg-white border border-gray-100/80 shadow-sm transition-shadow duration-300 hover:shadow-md">
+            <div
+              className="relative aspect-[4/3] flex items-center justify-center p-6 bg-[#FAFAFA]"
+              style={{ minHeight: 0 }}
+            >
+              <img
+                src={project.image}
+                alt=""
+                className="w-full h-full object-contain"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+          <p className="mt-3 text-sm font-normal text-gray-500 tracking-tight text-center">
+            {project.label}
+          </p>
         </div>
       );
     }
-    return imageElements;
+    return elements;
   };
 
   return (
-    <motion.div
-      className="scroller-container"
+    <section
       ref={containerRef}
-      variants={variants}
-      initial="hidden"
-      animate={inView ? "visible" : "hidden"}
+      className="w-full overflow-hidden py-20 bg-[#FAFAFA] border-t border-gray-100/60"
+      aria-label="Selected work"
     >
-      <div className="scroller" ref={scrollerRef}>
-        {renderImages()}
+      <div className="mb-10 px-6 md:px-10">
+        <span className="text-[11px] font-normal text-gray-400 uppercase tracking-[0.2em]">
+          Selected work
+        </span>
       </div>
-    </motion.div>
+      <div
+        ref={scrollerRef}
+        className="flex will-change-transform"
+        style={{ backfaceVisibility: "hidden" }}
+      >
+        {renderCards()}
+      </div>
+    </section>
   );
 };
 

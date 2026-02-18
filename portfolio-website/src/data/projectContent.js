@@ -280,6 +280,44 @@ export const AUCTOSELLERAPP = {
     ]
 };
 
+export const PEPSI = {
+  id: 4,
+  company: "Pepsi",
+  title: "An enterprise dashboard enabling faster, data-driven deal decisions",
+  platform: "Web",
+  service: "Enterprise Dashboard",
+  role: "UI/UX Designer",
+  image:kaashinImage1,
+  projectInfoSections: [
+    {
+      heading: "Project Overview",
+      content: [
+        "An enterprise dashboard designed to enable faster, data-driven deal decisions for Pepsi's business operations.",
+      ],
+    },
+  ],
+  processSteps: [],
+};
+
+export const DINGG = {
+  id: 5,
+  company: "Dingg",
+  title: "An end-to-end SaaS platform for managing salon operations and growth",
+  platform: "Web & Mobile",
+  service: "SaaS Platform",
+  role: "UI/UX Designer",
+  image:auctoImage1,
+  projectInfoSections: [
+    {
+      heading: "Project Overview",
+      content: [
+        "An end-to-end SaaS platform for managing salon operations, bookings, and business growth.",
+      ],
+    },
+  ],
+  processSteps: [],
+};
+
 export const KAASHIN = {
     id: 5,
     company: "Kaashin",
