@@ -149,7 +149,7 @@ function IconTile({ tool, tileRef: registerTileRef }) {
       { opacity: 0, scale: 0.98 },
       { opacity: 1, scale: 1, duration: 0.28, ease: "power2.out" }
     );
-  }, [isHovered, popupPosition]);
+  }, [isHovered, popupPosition, showPopup, isExiting]);
 
   return (
     <>
