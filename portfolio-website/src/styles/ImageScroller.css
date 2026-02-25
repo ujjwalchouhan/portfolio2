@@ -58,7 +58,7 @@
   letter-spacing: 0.2em;
 }
 
-/* Edge fade – softer, atmospheric */
+/* Edge fade – minimalistic: short, clean trim */
 .scroller-mask {
   position: relative;
   overflow: hidden;
@@ -66,19 +66,21 @@
   mask-image: linear-gradient(
     to right,
     transparent 0,
-    black 80px,
-    black calc(100% - 80px),
+    black 56px,
+    black calc(100% - 56px),
     transparent 100%
   );
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0,
-    black 80px,
-    black calc(100% - 80px),
+    black 56px,
+    black calc(100% - 56px),
     transparent 100%
   );
   mask-size: 100% 100%;
+  mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
 }
 
 .scroller-track {
