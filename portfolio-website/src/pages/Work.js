@@ -1,10 +1,12 @@
 import React from "react";
-import WorkHero from "../components/WorkHero";
+import WorkScene from "../components/WorkScene";
+import WorkGrid from "../components/WorkGrid";
 
 const Work = () => {
   return (
     <>
-      <WorkHero />
+      <WorkScene />
+      <WorkGrid />
     </>
   );
 };

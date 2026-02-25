@@ -1,18 +1,28 @@
 import React from "react";
-import "./../styles/HeadingImageList.css";
+import PropTypes from "prop-types";
 
-
-const HeadingImageList = ({ sections }) => {
-    return (
-      <div className="section-display">
-        {sections.map((item, index) => (
-          <div key={index} className="section-item">
-            <h2 className="section-heading">{item.heading}</h2>
-            <img src={item.image} alt={item.heading} className="section-image" />
+const HeadingImageList = ({ sections = [] }) => {
+  return (
+    <div className="project-content-steps">
+      {sections.map((item, index) => (
+        <div key={index} className="project-content-step">
+          <h3 className="project-content-step-heading">{item.heading}</h3>
+          <div className="project-content-step-image-wrap">
+            <img src={item.image} alt={item.heading} loading="lazy" />
           </div>
-        ))}
-      </div>
-    );
-  };
-  
-  export default HeadingImageList;
+        </div>
+      ))}
+    </div>
+  );
+};
+
+HeadingImageList.propTypes = {
+  sections: PropTypes.arrayOf(
+    PropTypes.shape({
+      heading: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+    })
+  ),
+};
+
+export default HeadingImageList;

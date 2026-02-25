@@ -1,0 +1,210 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600&display=swap");
+
+/* Section – white BG, cards always white */
+.work-grid-section {
+  padding: 5rem 0 6rem;
+  background: #fff;
+  color: #0a0a0a;
+}
+
+.work-grid-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.work-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  align-items: stretch;
+}
+
+@media (max-width: 768px) {
+  .work-grid-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card – always white background, minimal border */
+.work-grid-card {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.35s ease,
+    opacity 0.35s ease;
+  cursor: pointer;
+  text-align: left;
+}
+
+/* Same transform/shadow as --active so adding the class doesn’t cause a second transition */
+.work-grid-card:hover,
+.work-grid-card--active {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.work-grid-card--dimmed {
+  opacity: 0.5;
+}
+
+.work-grid-card-inner {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Image area – equal padding on all sides for consistent, premium spacing */
+.work-grid-card-image-wrap {
+  position: relative;
+  overflow: hidden;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: var(--card-image-bg, #fafafa);
+}
+
+.work-grid-card-image-mask {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Inner frame: fixed aspect so space from wrap is equal on all sides; image scales inside */
+.work-grid-card-image-frame {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+.work-grid-card-image {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transform-origin: center center;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.work-grid-card:hover .work-grid-card-image,
+.work-grid-card--active .work-grid-card-image {
+  transform: scale(1.05);
+}
+
+/* Content – white card surface */
+.work-grid-card-content {
+  padding: 1.5rem 1.5rem 1.75rem;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.work-grid-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #666;
+}
+
+.work-grid-card-company {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #111;
+}
+
+.work-grid-card-company span {
+  color: #f94c0c;
+}
+
+.work-grid-card-title {
+  font-family: "Urbanist", sans-serif;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #222;
+}
+
+.work-grid-card-cta-wrap {
+  margin-top: 0.75rem;
+  padding: 4px 0 0 4px; /* Buffer to prevent clipping on left/top */
+}
+
+.work-grid-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.06);
+  color: #111;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.work-grid-card-cta-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.work-grid-card-cta-arrow svg {
+  overflow: visible;
+}
+
+.work-grid-card-cta:hover {
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.work-grid-card-cta:hover .work-grid-card-cta-arrow {
+  transform: translateX(4px);
+}
+
+.work-grid-card-cta-ripple {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  margin-top: -10px;
+  border-radius: 50%;
+  background: rgba(249, 76, 12, 0.25);
+  transform: scale(0);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-grid-card,
+  .work-grid-card-image,
+  .work-grid-card-cta-arrow {
+    transition: none;
+  }
+}

@@ -1,0 +1,57 @@
+/* Single hero scene – navbar + hero share one space and timeline */
+.hero-scene {
+  position: relative;
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+/* Shared depth gradient – About-style blue→orange, follows mouse */
+.hero-scene-depth {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 80% 50% at 50% 50%,
+    rgba(40, 65, 188, 0.06) 0%,
+    rgba(255, 130, 4, 0.03) 40%,
+    transparent 60%
+  );
+  transition: opacity 0.4s ease;
+}
+
+/* Hero glow ellipses – same as About (hero-scoped, does not affect .about-glow) */
+.hero-glow {
+  position: absolute;
+  background: linear-gradient(139.52deg, #2841BC 23.02%, #FF8204 86.13%);
+  filter: blur(106.667px);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-glow-main {
+  width: 1258px;
+  height: 283px;
+  left: calc(50% - 1258px / 2 - 22px);
+  bottom: -75px;
+  opacity: 0.35;
+}
+.hero-glow-top-right {
+  width: 343px;
+  height: 248px;
+  right: calc(50% - 343px / 2 - 139px);
+  top: -50px;
+  opacity: 0.4;
+}
+.hero-glow-bottom-left {
+  width: 231px;
+  height: 167px;
+  left: calc(50% - 231px / 2 - 144px);
+  bottom: 80px;
+  opacity: 0.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scene-depth {
+    transition: none;
+  }
+}

@@ -36,15 +36,6 @@ const Card = ({ image, category, title, tags, path }) => {
         </div>
 
         <h2 className="card-title">{title}</h2>
-
-        <div className="card-tags">
-          {tags.map((tag, index) => (
-            <React.Fragment key={index}>
-              <span>{tag}</span>
-              {index < tags.length - 1 && <span className="dot"></span>}
-            </React.Fragment>
-          ))}
-        </div>
       </div>
     </motion.div>
   );

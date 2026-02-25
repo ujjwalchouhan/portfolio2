@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600&display=swap");
+
+/* Work hero – matches hero/about dark gradient + depth glows */
+.work-scene {
+  position: relative;
+  width: 100%;
+  min-height: 48vh;
+  background: linear-gradient(170.1deg, #111111 7.43%, #0e1015 96.62%);
+  overflow: hidden;
+}
+
+/* Depth glow orbs – same as About section */
+.work-scene-glow {
+  position: absolute;
+  background: linear-gradient(139.52deg, #2841bc 23.02%, #ff8204 86.13%);
+  filter: blur(106.667px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.work-scene-glow-main {
+  width: 1258px;
+  height: 283px;
+  left: calc(50% - 1258px / 2 - 22px);
+  bottom: -75px;
+  opacity: 0.4;
+}
+
+.work-scene-glow-top-right {
+  width: 343px;
+  height: 248px;
+  right: calc(50% - 343px / 2 - 139px);
+  top: -50px;
+  opacity: 0.5;
+}
+
+.work-scene-glow-bottom-left {
+  width: 231px;
+  height: 167px;
+  left: calc(50% - 231px / 2 - 144px);
+  bottom: 80px;
+  opacity: 0.5;
+}
+
+.work-scene-inner {
+  position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: clamp(80px, 12vh, 160px) clamp(24px, 6vw, 80px) clamp(56px, 10vh, 100px);
+  z-index: 1;
+}
+
+.work-scene-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.work-scene-back {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.9);
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+}
+
+.work-scene-back:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateX(-2px);
+}
+
+.work-scene-label {
+  font-family: "Urbanist", sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #f94c0c;
+}
+
+.work-scene-heading {
+  font-family: "Urbanist", sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  max-width: 720px;
+}

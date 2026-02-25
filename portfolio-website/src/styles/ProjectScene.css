@@ -1,0 +1,167 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600&display=swap");
+
+/* Project detail hero – matches WorkScene/About */
+.project-scene {
+  position: relative;
+  width: 100%;
+  min-height: 56vh;
+  background: linear-gradient(170.1deg, #111111 7.43%, #0e1015 96.62%);
+  overflow: hidden;
+}
+
+.project-scene-glow {
+  position: absolute;
+  background: linear-gradient(139.52deg, #2841bc 23.02%, #ff8204 86.13%);
+  filter: blur(106.667px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.project-scene-glow-main {
+  width: 1258px;
+  height: 283px;
+  left: calc(50% - 1258px / 2 - 22px);
+  bottom: -75px;
+  opacity: 0.4;
+}
+
+.project-scene-glow-top-right {
+  width: 343px;
+  height: 248px;
+  right: calc(50% - 343px / 2 - 139px);
+  top: -50px;
+  opacity: 0.5;
+}
+
+.project-scene-glow-bottom-left {
+  width: 231px;
+  height: 167px;
+  left: calc(50% - 231px / 2 - 144px);
+  bottom: 80px;
+  opacity: 0.5;
+}
+
+.project-scene-inner {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(100px, 14vh, 160px) clamp(1.5rem, 5vw, 3rem) clamp(3rem, 8vh, 4rem);
+  z-index: 1;
+}
+
+.project-scene-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.project-scene-back {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.9);
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+}
+
+.project-scene-back:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateX(-2px);
+}
+
+.project-scene-breadcrumb {
+  font-family: "Urbanist", sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.project-scene-breadcrumb a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.project-scene-breadcrumb a:hover {
+  color: #f94c0c;
+}
+
+.project-scene-breadcrumb .sep {
+  margin: 0 0.5rem;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.project-scene-breadcrumb .current {
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.project-scene-heading {
+  font-family: "Urbanist", sans-serif;
+  font-size: clamp(1.875rem, 4.5vw, 3.25rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0 0 2rem;
+  max-width: 800px;
+}
+
+.project-scene-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem 3rem;
+  margin-bottom: 2.5rem;
+}
+
+.project-scene-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.project-scene-meta-label {
+  font-family: "Urbanist", sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.project-scene-meta-value {
+  font-family: "Urbanist", sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Premium hero image – no device/mockup chrome, Awwwards-level showcase */
+.project-scene-hero {
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(248, 248, 250, 0.98);
+  box-shadow: 0 32px 64px -24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.project-scene-hero img {
+  /* width: 100%; */
+  height: auto;
+  display: block;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+  vertical-align: middle;
+}

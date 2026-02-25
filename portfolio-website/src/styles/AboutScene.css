@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Urbanist:wght@400;500;600&display=swap');
+
+/* About Scene - cinematic scroll-driven section */
+
+.about-scene {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.about-scene-grid {
+  perspective: 1200px;
+}
+
+.about-scene-bg {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  transform-origin: center center;
+}
+
+.about-quote-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.about-name-underline {
+  width: 100%;
+  max-width: 200px;
+}
+
+.about-reading-cursor {
+  mix-blend-mode: difference;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-scene-bg {
+    animation: none;
+  }
+
+  .about-quote-card::before {
+    animation: none;
+    opacity: 0.5;
+  }
+
+  .about-quote-card,
+  .about-content,
+  .about-name-block,
+  .about-bio-p,
+  .about-resume-btn {
+    transition: none;
+  }
+
+  .about-reading-cursor {
+    display: none;
+  }
+}
