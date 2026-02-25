@@ -3,18 +3,12 @@ import PropTypes from "prop-types";
 
 const HeadingImageList = ({ sections = [] }) => {
   return (
-    <div className="space-y-12">
+    <div className="project-content-steps">
       {sections.map((item, index) => (
-        <div key={index} className="space-y-4">
-          <h3 className="text-xl md:text-2xl font-medium text-brand-black tracking-tight">
-            {item.heading}
-          </h3>
-          <div className="rounded-2xl overflow-hidden border border-gray-100 bg-white">
-            <img
-              src={item.image}
-              alt={item.heading}
-              className="w-full h-auto object-cover"
-            />
+        <div key={index} className="project-content-step">
+          <h3 className="project-content-step-heading">{item.heading}</h3>
+          <div className="project-content-step-image-wrap">
+            <img src={item.image} alt={item.heading} loading="lazy" />
           </div>
         </div>
       ))}

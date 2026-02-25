@@ -1,53 +1,47 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useState, useRef, useLayoutEffect, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
+import gsap from "gsap";
+import { useHeroScene } from "../context/HeroSceneContext";
+import "../styles/HeroIconScroller.css";
 
-const CDN_BASE = "https://cdn.simpleicons.org";
-
-// Inline SVG fallbacks for icons removed from simple-icons CDN (Adobe, OpenAI)
-const FALLBACK_SVGS = {
-  adobexd: (color) => (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
-      <path d="M4 4h16v16H4V4zm2 2v12h12V6H6zm3 2h2v2h2v2h-2v4H9v-8zm5 0h2v8h-2v-3h-1v3h-2V8h2v2h1V8z" fill={`#${color}`} />
-    </svg>
-  ),
-  adobeillustrator: (color) => (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
-      <path d="M5 4h3v16H5V4zm11 0h3v7h-3V4zm0 9h3v7h-3v-7zM8 7h2l2 3 2-3h2v10h-2v-6l-1.5 2L11 11v6H9V7z" fill={`#${color}`} />
-    </svg>
-  ),
-  adobe: (color) => (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
-      <path d="M12 2L2 22h4l6-12 6 12h4L12 2z" fill={`#${color}`} />
-    </svg>
-  ),
-  openai: (color) => (
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6">
-      <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" fill={`#${color}`} />
-      <path d="M12 6v6l4 2" stroke={`#${color}`} strokeWidth="1.5" strokeLinecap="round" fill="none" />
-    </svg>
-  ),
-};
+import iconChatgpt from "../assets/icons/scroller/chatgpt.svg";
+import iconNotion from "../assets/icons/scroller/notion.svg";
+import iconMirror from "../assets/icons/scroller/mirror.svg";
+import iconAdobe from "../assets/icons/scroller/adobe.svg";
+import iconAi from "../assets/icons/scroller/ai.svg";
+import iconPs from "../assets/icons/scroller/ps.svg";
+import iconSd from "../assets/icons/scroller/sd.svg";
+import iconIllustrator from "../assets/icons/scroller/illustator.svg";
+import iconFarmer from "../assets/icons/scroller/farmer.svg";
+import iconSketch from "../assets/icons/scroller/sketch.svg";
+import iconFigma from "../assets/icons/scroller/figma.svg";
 
 const TOOLS = [
-  { slug: "figma", color: "F24E1E", name: "Figma", description: "Design tool for creating and collaborating" },
-  { slug: "sketch", color: "FDB300", name: "Sketch", description: "Digital design toolkit for interfaces" },
-  { slug: "framer", color: "0055FF", name: "Framer", description: "Design and prototyping for interactive UIs" },
-  { slug: "googleanalytics", color: "E37400", name: "Google Analytics", description: "Web analytics and insights" },
-  { slug: "adobexd", color: "FF61F6", name: "Adobe XD", description: "UI/UX design and prototyping", useFallbackSvg: true },
-  { slug: "adobeillustrator", color: "FF9A00", name: "Illustrator", description: "Vector graphics and illustration", useFallbackSvg: true },
-  { slug: "adobe", color: "FF0000", name: "Adobe Creative Cloud", description: "Creative apps and services", useFallbackSvg: true },
-  { slug: "webflow", color: "4353FF", name: "Webflow", description: "Visual development for the web" },
-  { slug: "notion", color: "000000", name: "Notion", description: "Docs, wikis, and project management" },
-  { slug: "openai", color: "412991", name: "ChatGPT", description: "AI assistant for conversation and tasks", useFallbackSvg: true },
+  { icon: iconFigma, name: "Figma", description: "Design tool for creating and collaborating" },
+  { icon: iconSketch, name: "Sketch", description: "Digital design toolkit for interfaces" },
+  { icon: iconAdobe, name: "Adobe", description: "Creative apps and services" },
+  { icon: iconPs, name: "Photoshop", description: "Image editing and digital art" },
+  { icon: iconIllustrator, name: "Illustrator", description: "Vector graphics and illustration" },
+  { icon: iconSd, name: "Stable Diffusion", description: "AI image generation" },
+  { icon: iconAi, name: "AI", description: "AI tools and workflows" },
+  { icon: iconChatgpt, name: "ChatGPT", description: "AI assistant for conversation and tasks" },
+  { icon: iconNotion, name: "Notion", description: "Docs, wikis, and project management" },
+  { icon: iconMirror, name: "Mirror", description: "Writing and publishing" },
+  { icon: iconFarmer, name: "Farmer", description: "Design and development" },
 ];
 
-const REPEAT_COUNT = 4;
-
-function IconTile({ tool }) {
+function IconTile({ tool, tileRef: registerTileRef }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
   const [popupPosition, setPopupPosition] = useState(null);
   const iconRef = useRef(null);
+  const elRef = useRef(null);
+  const setRef = useCallback((el) => {
+    elRef.current = el;
+    if (typeof registerTileRef === "function") registerTileRef(el);
+  }, [registerTileRef]);
+  const tooltipRef = useRef(null);
 
   useLayoutEffect(() => {
     if (!isHovered || !iconRef.current) return;
@@ -58,32 +52,81 @@ function IconTile({ tool }) {
     });
   }, [isHovered]);
 
-  const handleClose = () => setIsHovered(false);
+  useEffect(() => {
+    if (!elRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (isHovered) {
+      gsap.to(elRef.current, {
+        scale: 1.08,
+        y: -4,
+        duration: 0.35,
+        ease: "power2.out",
+        boxShadow: "0 12px 28px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.08)",
+        overwrite: true,
+      });
+    } else {
+      gsap.to(elRef.current, {
+        scale: 1,
+        y: 0,
+        duration: 0.35,
+        ease: "power2.out",
+        boxShadow: "0 0 0 1px rgba(255,255,255,0.06)",
+        overwrite: true,
+      });
+    }
+  }, [isHovered]);
 
-  const popupContent = isHovered && popupPosition && (
+  const handleClose = useCallback(() => {
+    if (!isHovered) return;
+    setIsHovered(false);
+    setIsExiting(true);
+  }, [isHovered]);
+
+  const runPopupExit = useCallback(() => {
+    if (!tooltipRef.current) {
+      setIsExiting(false);
+      return;
+    }
+    gsap.to(tooltipRef.current, {
+      opacity: 0,
+      scale: 0.98,
+      duration: 0.25,
+      ease: "power2.in",
+      onComplete: () => setIsExiting(false),
+    });
+  }, []);
+
+  useEffect(() => {
+    if (isExiting) runPopupExit();
+  }, [isExiting, runPopupExit]);
+
+  const showPopup = (isHovered || isExiting) && popupPosition;
+  const popupContent = showPopup && (
     <div
-      className="fixed z-[9999] w-[14rem] pointer-events-auto"
+      ref={tooltipRef}
+      className="hero-icon-tooltip fixed z-[9999] w-[14rem] pointer-events-auto"
       style={{
         left: popupPosition.left,
         top: popupPosition.top,
         transform: "translate(-50%, calc(-100% - 8px))",
+        opacity: isExiting ? undefined : 0,
+        transformOrigin: "50% 100%",
       }}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={() => { setIsExiting(false); setIsHovered(true); }}
       onMouseLeave={handleClose}
       role="tooltip"
       aria-live="polite"
     >
       <div
-        className="rounded-2xl px-4 py-3 shadow-xl border border-white/20"
+        className="hero-icon-tooltip-inner rounded-2xl px-4 py-3 shadow-xl border border-white/20"
         style={{
-          background: "#F5F5F7",
-          boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
+          background: "rgba(255, 255, 255, 0.98)",
+          boxShadow: "0 12px 32px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.06)",
         }}
       >
         <p className="text-sm font-semibold text-[#0A0A0A] leading-tight mb-1">
           {tool.name}
         </p>
-        <p className="text-xs text-[#888888] leading-snug">
+        <p className="text-xs text-[#666666] leading-snug">
           {tool.description}
         </p>
       </div>
@@ -92,12 +135,21 @@ function IconTile({ tool }) {
         style={{
           top: "100%",
           marginTop: "2px",
-          borderTopColor: "#F5F5F7",
+          borderTopColor: "rgba(255, 255, 255, 0.98)",
         }}
         aria-hidden="true"
       />
     </div>
   );
+
+  useLayoutEffect(() => {
+    if (!tooltipRef.current || !showPopup || isExiting) return;
+    gsap.fromTo(
+      tooltipRef.current,
+      { opacity: 0, scale: 0.98 },
+      { opacity: 1, scale: 1, duration: 0.28, ease: "power2.out" }
+    );
+  }, [isHovered, popupPosition]);
 
   return (
     <>
@@ -109,35 +161,18 @@ function IconTile({ tool }) {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={handleClose}
       >
-        <div className="w-12 h-12 flex-shrink-0 bg-white/5 rounded-xl border border-white/10 flex items-center justify-center p-2 transition-colors duration-200 group-hover:bg-white/10 group-hover:border-white/15">
-          {tool.useFallbackSvg && FALLBACK_SVGS[tool.slug] ? (
-            <span className="grayscale group-hover:grayscale-0 transition-all duration-300 flex items-center justify-center [&>svg]:shrink-0">
-              {FALLBACK_SVGS[tool.slug](tool.color)}
-            </span>
-          ) : (
-            <>
-              <img
-                src={`${CDN_BASE}/${tool.slug}/${tool.color}`}
-                alt=""
-                width={24}
-                height={24}
-                className="w-6 h-6 object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
-                loading="lazy"
-                onError={(e) => {
-                  e.target.style.display = "none";
-                  const fallback = e.target.nextElementSibling;
-                  if (fallback) fallback.hidden = false;
-                }}
-              />
-              <span
-                className="text-sm font-semibold text-white/80 hidden"
-                hidden
-                aria-hidden="true"
-              >
-                {tool.name.charAt(0)}
-              </span>
-            </>
-          )}
+        <div
+          ref={setRef}
+          className="hero-icon-tile flex-shrink-0 flex items-center justify-center transition-colors duration-200"
+        >
+          <img
+            src={tool.icon}
+            alt=""
+            width={20}
+            height={20}
+            className="hero-icon-img object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+            loading="lazy"
+          />
         </div>
       </div>
       {typeof document !== "undefined" && popupContent && createPortal(popupContent, document.body)}
@@ -145,23 +180,58 @@ function IconTile({ tool }) {
   );
 }
 
+const REPEAT_COUNT = 3;
+
 function HeroIconScroller() {
+  const trackRef = useRef(null);
+  const iconRefsRef = useRef([]);
+  const { mousePosition } = useHeroScene();
+  const setTileRef = useCallback((el, idx) => {
+    iconRefsRef.current[idx] = el;
+  }, []);
+
+  // Proximity: active dist<80, neighbor dist<160 (no scroll parallax when auto-scrolling)
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+    let rafId;
+    const update = () => {
+      const mp = mousePosition.current;
+      const icons = iconRefsRef.current.filter(Boolean);
+      icons.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        const dist = mp.inside ? Math.hypot(mp.clientX - cx, mp.clientY - cy) : 9999;
+        const active = dist < 80;
+        const neighbor = dist < 160 && !active;
+        const scale = active ? 1.06 : neighbor ? 0.96 : 1;
+        const opacity = active ? 1 : neighbor ? 0.7 : 0.9;
+        const filter = active ? "grayscale(0)" : "grayscale(0.4)";
+        gsap.to(el, { scale, opacity, filter, duration: 0.25, ease: "power2.out", overwrite: true });
+      });
+      rafId = requestAnimationFrame(update);
+    };
+    rafId = requestAnimationFrame(update);
+    return () => rafId && cancelAnimationFrame(rafId);
+  }, [mousePosition]);
+
   return (
-    <div
-      className="relative z-20 mt-24 w-full max-w-4xl mx-auto px-6 overflow-x-hidden overflow-y-visible flex items-center justify-center opacity-90 hover:opacity-100 transition-opacity duration-500 hero-icon-scroller-mask"
-      aria-hidden="true"
-    >
-      <div className="hero-icon-scroll-track flex items-center gap-5 md:gap-6">
+    <div className="hero-icon-scroller" aria-hidden="true">
+      <div className="hero-icon-scroller-inner hero-icon-scroller-mask">
+        <div ref={trackRef} className="hero-icon-scroll-track">
         {Array.from({ length: REPEAT_COUNT }, (_, blockIndex) => (
-          <div
-            key={blockIndex}
-            className="flex items-center gap-5 md:gap-6 flex-shrink-0"
-          >
-            {TOOLS.map((tool) => (
-              <IconTile key={`${blockIndex}-${tool.slug}`} tool={tool} />
+          <div key={blockIndex} className="hero-icon-scroller-set">
+            {TOOLS.map((tool, i) => (
+              <IconTile
+                key={`${blockIndex}-${tool.name}`}
+                tool={tool}
+                tileRef={(el) => setTileRef(el, blockIndex * TOOLS.length + i)}
+              />
             ))}
           </div>
         ))}
+        </div>
       </div>
     </div>
   );
@@ -169,11 +239,9 @@ function HeroIconScroller() {
 
 IconTile.propTypes = {
   tool: PropTypes.shape({
-    slug: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    useFallbackSvg: PropTypes.bool,
   }).isRequired,
 };
 

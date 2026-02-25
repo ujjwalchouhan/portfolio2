@@ -1,135 +1,238 @@
-import React, { useEffect, useRef } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
+import { useNavigate } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
-import {
-  ELRIADSHRINE,
-  AUCTOSELLERAPP,
-  PEPSI,
-  DINGG,
-} from "../data/projectContent";
+import { FEATURED_PROJECTS } from "../data/featuredWork";
+import "../styles/ImageScroller.css";
 
-const PROJECTS = [
-  { ...ELRIADSHRINE, label: ELRIADSHRINE.platform },
-  { ...AUCTOSELLERAPP, label: AUCTOSELLERAPP.platform },
-  { ...PEPSI, label: PEPSI.platform },
-  { ...DINGG, label: DINGG.platform },
-];
+const PROJECTS = FEATURED_PROJECTS.map((p) => ({
+  ...p,
+  label: (p.tags && p.tags[0]) || p.platform || p.company,
+}));
+
+const CARD_WIDTH = 280;
+const CARD_GAP = 24;
+const BASE_SPEED = 22; // px/s – calm, premium
+const LERP = 0.035; // interpolation – smooth, no abrupt changes
+
+// Subtle vertical offset – minimal depth (max ±3px)
+const getParallaxY = (index) => {
+  const phase = index % 3;
+  if (phase === 0) return 0;
+  if (phase === 1) return -3;
+  return 2;
+};
 
 const ImageScroller = () => {
-  const CARD_WIDTH = 300;
-  const CARD_GAP = 24;
-  const PROJECT_COUNT = PROJECTS.length;
-  const DUPLICATION_FACTOR = 4;
-  const TARGET_SPEED = 60;
-
-  const scrollerRef = useRef(null);
-  const animationRef = useRef(null);
-  const scrollPosition = useRef(0);
+  const navigate = useNavigate();
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null);
+  const scrollX = useRef(0);
+  const currentSpeed = useRef(BASE_SPEED);
   const lastTimeRef = useRef(null);
 
-  const [containerRef, inView] = useInView({
-    triggerOnce: true,
+  const [sectionHovered, setSectionHovered] = useState(false);
+  const [hoveredCardIndex, setHoveredCardIndex] = useState(-1);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const [scrollState, setScrollState] = useState({ x: 0, width: 0 });
+  const frameCount = useRef(0);
+
+  const { ref: inViewRef, inView } = useInView({
     threshold: 0.1,
+    triggerOnce: false,
   });
 
-  const getSpeedMultiplier = () => {
-    if (typeof window === "undefined") return 1;
-    if (document.hidden) return 0.3;
-    return 1;
-  };
+  // Duplicate items for seamless infinite loop (2 full cycles minimum)
+  const DUPLICATION = 2;
+  const ITEMS = useMemo(() => {
+    const arr = [];
+    for (let i = 0; i < PROJECTS.length * DUPLICATION; i++) {
+      arr.push({ ...PROJECTS[i % PROJECTS.length], index: i });
+    }
+    return arr;
+  }, []);
+
+  const stepWidth = PROJECTS.length * (CARD_WIDTH + CARD_GAP);
 
   useEffect(() => {
-    if (!inView) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+  }, []);
 
-    const scroller = scrollerRef.current;
-    if (!scroller) return;
+  // Target speed: card hover = 0, section hover = 30% of base, default = base; pause when off-screen
+  const targetSpeed = useMemo(() => {
+    if (!inView) return 0;
+    if (hoveredCardIndex >= 0) return 0;
+    if (sectionHovered) return BASE_SPEED * 0.3;
+    return BASE_SPEED;
+  }, [inView, sectionHovered, hoveredCardIndex]);
 
-    scrollPosition.current = 0;
-    lastTimeRef.current = null;
-    const step = PROJECT_COUNT * (CARD_WIDTH + CARD_GAP);
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track || reducedMotion || !inView) return;
 
+    let rafId;
     const animate = (timestamp) => {
       if (!lastTimeRef.current) lastTimeRef.current = timestamp;
-      const deltaTime = timestamp - lastTimeRef.current;
+      const dt = (timestamp - lastTimeRef.current) / 1000;
       lastTimeRef.current = timestamp;
 
-      const speed =
-        (TARGET_SPEED * deltaTime * getSpeedMultiplier()) / 1000;
-      scrollPosition.current += speed;
+      // Interpolate speed (no abrupt stop)
+      const diff = targetSpeed - currentSpeed.current;
+      currentSpeed.current += diff * Math.min(1, LERP + dt * 2);
 
-      if (scrollPosition.current >= step) {
-        scrollPosition.current -= step;
+      scrollX.current += currentSpeed.current * dt;
+
+      if (scrollX.current >= stepWidth) {
+        scrollX.current -= stepWidth;
+      }
+      if (scrollX.current < 0) {
+        scrollX.current += stepWidth;
       }
 
-      scroller.style.transform = `translateX(-${scrollPosition.current}px)`;
-      animationRef.current = requestAnimationFrame(animate);
-    };
-
-    animationRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
+      track.style.transform = `translate3d(-${scrollX.current}px, 0, 0)`;
+      frameCount.current += 1;
+      if (frameCount.current % 4 === 0 && sectionRef.current) {
+        setScrollState({
+          x: scrollX.current,
+          width: sectionRef.current.offsetWidth || 0,
+        });
       }
+      rafId = requestAnimationFrame(animate);
     };
-  }, [inView, PROJECT_COUNT, CARD_WIDTH, CARD_GAP, TARGET_SPEED]);
 
-  const renderCards = () => {
-    const elements = [];
-    const total = PROJECT_COUNT * DUPLICATION_FACTOR;
+    rafId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafId);
+  }, [targetSpeed, stepWidth, reducedMotion, inView]);
 
-    for (let i = 0; i < total; i++) {
-      const project = PROJECTS[i % PROJECT_COUNT];
-      elements.push(
-        <div
-          key={`card-${i}`}
-          className="flex-shrink-0 flex flex-col"
-          style={{
-            width: `${CARD_WIDTH}px`,
-            marginRight: `${CARD_GAP}px`,
-          }}
-        >
-          <div className="rounded-2xl overflow-hidden bg-white border border-gray-100/80 shadow-sm transition-shadow duration-300 hover:shadow-md">
-            <div
-              className="relative aspect-[4/3] flex items-center justify-center p-6 bg-[#FAFAFA]"
-              style={{ minHeight: 0 }}
-            >
-              <img
-                src={project.image}
-                alt=""
-                className="w-full h-full object-contain"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </div>
-          <p className="mt-3 text-sm font-normal text-gray-500 tracking-tight text-center">
-            {project.label}
-          </p>
-        </div>
-      );
-    }
-    return elements;
-  };
+  const handleCardClick = useCallback(
+    (project) => {
+      if (project.path) navigate(`/work/${project.path}`);
+    },
+    [navigate]
+  );
 
   return (
     <section
-      ref={containerRef}
-      className="w-full overflow-hidden py-20 bg-[#FAFAFA] border-t border-gray-100/60"
+      ref={(el) => {
+        sectionRef.current = el;
+        inViewRef(el);
+      }}
+      className="scroller-section"
       aria-label="Selected work"
+      onMouseEnter={() => setSectionHovered(true)}
+      onMouseLeave={() => setSectionHovered(false)}
     >
-      <div className="mb-10 px-6 md:px-10">
-        <span className="text-[11px] font-normal text-gray-400 uppercase tracking-[0.2em]">
-          Selected work
-        </span>
-      </div>
-      <div
-        ref={scrollerRef}
-        className="flex will-change-transform"
-        style={{ backfaceVisibility: "hidden" }}
-      >
-        {renderCards()}
+      <div className="scroller-section-inner">
+        <div className={`scroller-label-wrap ${inView ? "scroller-label-wrap--visible" : ""}`}>
+          <span className="scroller-label">Selected work</span>
+        </div>
+
+        <div className="scroller-mask">
+          <div
+            ref={trackRef}
+            className="scroller-track"
+            style={{ backfaceVisibility: "hidden", willChange: "transform" }}
+          >
+            {ITEMS.map((project, i) => (
+              <ScrollerCard
+                key={`${project.label}-${i}`}
+                project={project}
+                index={i}
+                parallaxY={getParallaxY(i)}
+                scrollX={scrollState.x}
+                containerWidth={scrollState.width}
+                isHovered={hoveredCardIndex === i}
+                isDimmed={
+                  hoveredCardIndex >= 0 && hoveredCardIndex !== i
+                }
+                onHover={() => setHoveredCardIndex(i)}
+                onLeave={() => setHoveredCardIndex(-1)}
+                onClick={() => handleCardClick(project)}
+                reducedMotion={reducedMotion}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
+  );
+};
+
+const ScrollerCard = ({
+  project,
+  index,
+  parallaxY,
+  scrollX,
+  containerWidth,
+  isHovered,
+  isDimmed,
+  onHover,
+  onLeave,
+  onClick,
+  reducedMotion,
+}) => {
+  const cardCenter = index * (CARD_WIDTH + CARD_GAP) + CARD_WIDTH / 2;
+  const viewCenter = scrollX + containerWidth / 2;
+  const distFromCenter = Math.abs(cardCenter - viewCenter);
+  const centerFactor = Math.max(0, 1 - distFromCenter / viewCenter);
+  const centerOpacity = reducedMotion || isHovered || isDimmed ? 1 : 0.78 + 0.22 * centerFactor;
+  const centerScale = reducedMotion || isHovered || isDimmed ? 1 : 1 + 0.02 * centerFactor;
+  const cardRef = useRef(null);
+  const imgRef = useRef(null);
+  const [imgLoaded, setImgLoaded] = useState(false);
+
+  const handleLoad = useCallback(() => {
+    setImgLoaded(true);
+  }, []);
+
+  return (
+    <div
+      ref={cardRef}
+      className={`scroller-card ${isHovered ? "scroller-card--hovered" : ""} ${isDimmed ? "scroller-card--dimmed" : ""} ${centerFactor > 0.5 ? "scroller-card--center" : ""}`}
+      style={{
+        width: CARD_WIDTH,
+        marginRight: CARD_GAP,
+        transform: `translate3d(0, ${parallaxY}px, 0) scale(${centerScale})`,
+        "--parallax-y": `${parallaxY}px`,
+        opacity: isDimmed ? undefined : centerOpacity,
+      }}
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
+      onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-label={`View ${project.label} case study`}
+    >
+      <div className="scroller-card-inner">
+        <div
+          className="scroller-card-image-wrap"
+          style={{ backgroundColor: project.cardBg || "#FAFAFA" }}
+        >
+          <img
+            ref={imgRef}
+            src={project.image}
+            alt=""
+            className={`scroller-card-image ${imgLoaded ? "scroller-card-image--loaded" : ""}`}
+            loading="lazy"
+            decoding="async"
+            onLoad={handleLoad}
+          />
+        </div>
+        <p className="scroller-card-label">{project.label}</p>
+      </div>
+    </div>
   );
 };
 

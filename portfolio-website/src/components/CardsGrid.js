@@ -57,7 +57,7 @@ const ProjectCard = ({ project }) => {
         <div className="relative overflow-hidden rounded-t-2xl aspect-[4/3] flex items-center justify-center p-8 bg-[#FAFAFA]">
           <img
             alt={`${project.company} Project`}
-            className="w-full h-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+            className="w-full h-full object-contain transition-transform duration-300 ease-out group-hover:scale-[1.02]"
             src={project.image}
           />
           {/* Hover: minimal corner badge — no blur, sharp and on-brand */}

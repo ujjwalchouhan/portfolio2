@@ -1,5 +1,120 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Urbanist:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
+/* ========== Premium interactive hero (GSAP + Lenis) ========== */
+.home-hero {
+  position: relative;
+  isolation: isolate;
+}
+.home-hero-depth-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 80% 50% at 50% 50%,
+    rgba(40, 65, 188, 0.08) 0%,
+    transparent 55%
+  );
+  transition: opacity 0.6s ease;
+}
+.home-hero-noise {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+/* Initial hidden until shared timeline reveals */
+.home-hero .home-hero-intro,
+.home-hero .home-hero-title-word,
+.home-hero .home-hero-desc,
+.home-hero .home-hero-btn,
+.home-hero .home-hero-icons-wrap {
+  opacity: 0;
+}
+
+.home-hero-intro {
+  font-family: "Urbanist", sans-serif;
+}
+/* Top-left light: title top edge slightly brighter (same as navbar) */
+.home-hero-title {
+  font-family: "Urbanist", sans-serif;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.06);
+}
+.home-hero-title-word {
+  display: inline-block;
+  margin-right: 0.12em;
+}
+.home-hero-desc {
+  font-family: "Urbanist", sans-serif;
+}
+.home-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  color: inherit;
+}
+.home-hero-btn-view {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.home-hero-btn-view:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* CTA hold > 700ms: highlight sweep */
+.home-hero-btn.cta-highlight-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.home-hero-btn.cta-highlight-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  clip-path: inset(0 100% 0 0);
+  animation: cta-sweep 0.5s ease-out forwards;
+}
+@keyframes cta-sweep {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+.home-hero-btn-resume {
+  background: linear-gradient(142.03deg, #ff6624 6.81%, #f94c0c 91.86%);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(255, 102, 36, 0.35);
+}
+.home-hero-btn-resume:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 6px 24px rgba(255, 102, 36, 0.45);
+}
+.home-hero-icons-wrap {
+  position: relative;
+  z-index: 10;
+  margin-top: 5rem;
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero-btn,
+  .home-hero-title-word {
+    transition: none;
+  }
+  .home-hero-btn-view:hover,
+  .home-hero-btn-resume:hover {
+    transform: none;
+  }
+}
+
 /* Hero: one column, consistent spacing, no overlap */
 .hero-container {
   position: relative;

@@ -1,19 +1,23 @@
 import React from "react";
-import CardsGrid from "../components/CardsGrid";
+import { ReadingModeProvider } from "../context/ReadingModeContext";
+import { HeroSceneProvider } from "../context/HeroSceneContext";
+import HomeScene from "../components/HomeScene";
+import FeaturedWork from "../components/FeaturedWork";
 import AboutSection from "../components/AboutSection";
-import HomeHero from "../components/HomeHero";
 import Process from "../components/Process";
 import ImageScroller from "../components/ImageScroller";
 
 const Home = () => {
   return (
-    <>
-      <HomeHero />
-      <CardsGrid />
+    <ReadingModeProvider>
+    <HeroSceneProvider>
+      <HomeScene />
+      <FeaturedWork />
       <AboutSection />
       <Process />
       <ImageScroller />
-    </>
+    </HeroSceneProvider>
+    </ReadingModeProvider>
   );
 };
 

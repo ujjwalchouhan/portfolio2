@@ -7,32 +7,20 @@ const KeySolutions = ({ solutions }) => {
   }
 
   return (
-    <div className="space-y-10">
-      <h3 className="text-xl md:text-2xl font-medium text-brand-black tracking-tight">
-        Key solutions implemented
-      </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="project-content-section">
+      <h3 className="project-content-heading">Key solutions implemented</h3>
+      <div className="project-content-solutions">
         {solutions.map((solution, index) => (
           <div
             key={solution.title || `solution-${index}`}
-            className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+            className="project-content-solution-card"
           >
-            <h4 className="text-base font-semibold text-brand-black tracking-tight mb-3">
-              {solution.title}
-            </h4>
-            <p className="text-sm md:text-base font-normal text-gray-600 leading-[1.7] mb-4">
-              {solution.description}
-            </p>
+            <h4 className="project-content-solution-title">{solution.title}</h4>
+            <p className="project-content-solution-desc">{solution.description}</p>
             {solution.items && solution.items.length > 0 && (
-              <ul className="space-y-2">
+              <ul className="project-content-solution-list">
                 {solution.items.map((item, itemIndex) => (
-                  <li
-                    key={`${solution.title}-item-${itemIndex}`}
-                    className="flex gap-2.5 text-sm font-normal text-gray-600 leading-[1.6]"
-                  >
-                    <span className="text-brand-accent font-medium flex-shrink-0">•</span>
-                    <span>{item}</span>
-                  </li>
+                  <li key={`${solution.title}-item-${itemIndex}`}>{item}</li>
                 ))}
               </ul>
             )}

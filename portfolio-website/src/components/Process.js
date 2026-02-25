@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useRef, useLayoutEffect, useState } from "react";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import "../styles/Process.css";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const STAGGER = 0.14;
 
 const STEPS = [
   {
+    id: "discovery",
     title: "Discovery",
     description:
       "I start by learning and research based on client brief and resources to gain about the needs, goals, product and requirements.",
     icon: (
       <svg
-        className="h-6 w-6 text-brand-accent"
+        className="process-step-icon"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -23,12 +31,13 @@ const STEPS = [
     ),
   },
   {
+    id: "strategy",
     title: "Strategy",
     description:
       "Then start to plan and structure of the project process based on the discovery phase before start design.",
     icon: (
       <svg
-        className="h-6 w-6 text-brand-accent"
+        className="process-step-icon"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -44,12 +53,13 @@ const STEPS = [
     ),
   },
   {
+    id: "design",
     title: "Design",
     description:
       "After I complete all the process. I will start to do the design process such as creating user flow, wireframe, UI design until finish.",
     icon: (
       <svg
-        className="h-6 w-6 text-brand-accent"
+        className="process-step-icon"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -67,32 +77,109 @@ const STEPS = [
 ];
 
 const Process = () => {
+  const sectionRef = useRef(null);
+  const labelRef = useRef(null);
+  const headingRef = useRef(null);
+  const cardRefs = useRef([]);
+  const connectorRef = useRef(null);
+  const gridRef = useRef(null);
+  const [hoveredIndex, setHoveredIndex] = useState(-1);
+  const [activeStep, setActiveStep] = useState(0);
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const label = labelRef.current;
+    const heading = headingRef.current;
+    const cards = cardRefs.current.filter(Boolean);
+    const connector = connectorRef.current;
+    const grid = gridRef.current;
+
+    if (!section || !label || !heading || !cards.length || !connector || !grid) return;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedMotion) return;
+
+    const ctx = gsap.context(() => {
+      gsap.set(label, { opacity: 0 });
+      gsap.set(heading, { y: 24, opacity: 0 });
+      gsap.set(cards, { y: 40, opacity: 0 });
+      gsap.set(connector, { scaleX: 0, transformOrigin: "left center" });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          onEnter: () => {},
+        },
+      });
+
+      tl.to(label, { opacity: 1, duration: 0.5, ease: "power2.out" })
+        .to(heading, { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }, "-=0.3")
+        .to(connector, { scaleX: 1, duration: 0.8, ease: "power2.out" }, "-=0.2")
+        .to(
+          cards,
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            stagger: STAGGER,
+            ease: "power2.out",
+          },
+          "-=0.5"
+        );
+    }, section);
+
+    const stActive = ScrollTrigger.create({
+      trigger: section,
+      start: "top 60%",
+      end: "bottom 30%",
+      onUpdate: (self) => {
+        const p = self.progress;
+        if (p < 0.35) setActiveStep(0);
+        else if (p < 0.65) setActiveStep(1);
+        else setActiveStep(2);
+      },
+    });
+
+    return () => {
+      ctx.revert();
+      stActive.kill();
+    };
+  }, []);
+
   return (
     <section
-      className="py-24 bg-[#F9F9F9] text-brand-black"
+      ref={sectionRef}
+      className="process-section"
       data-purpose="working-process"
       id="process"
     >
-      <div className="container mx-auto px-6">
-        <div className="mb-16">
-          <span className="text-brand-accent font-semibold tracking-widest text-xs uppercase">
+      <div className="process-bg-glow" aria-hidden="true" />
+      <div className="process-container">
+        <div className="process-header">
+          <span ref={labelRef} className="process-label">
             Process
           </span>
-          <h2 className="text-4xl md:text-5xl font-medium mt-4">
+          <h2 ref={headingRef} className="process-heading">
             Let&apos;s have a look on my working process
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {STEPS.map((step) => (
+
+        <div ref={gridRef} className="process-grid">
+          <div ref={connectorRef} className="process-connector" aria-hidden="true" />
+          {STEPS.map((step, i) => (
             <div
-              key={step.title}
-              className="bg-white p-10 rounded-[32px] border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+              key={step.id}
+              ref={(el) => { cardRefs.current[i] = el; }}
+              className={`process-card ${hoveredIndex === i ? "process-card--hovered" : ""} ${hoveredIndex >= 0 && hoveredIndex !== i ? "process-card--dimmed" : ""} ${activeStep === i ? "process-card--active" : ""}`}
+              onMouseEnter={() => setHoveredIndex(i)}
+              onMouseLeave={() => setHoveredIndex(-1)}
             >
-              <div className="w-12 h-12 bg-orange-50 rounded-full flex items-center justify-center mb-6">
+              <div className="process-card-icon-wrap">
                 {step.icon}
               </div>
-              <h4 className="text-xl font-bold mb-4">{step.title}</h4>
-              <p className="text-gray-500 leading-relaxed">{step.description}</p>
+              <h4 className="process-card-title">{step.title}</h4>
+              <p className="process-card-desc">{step.description}</p>
             </div>
           ))}
         </div>

@@ -175,11 +175,6 @@
     left: 48px;
     top: 160px;
   }
-
-  .work-hero-heading {
-    font-size: 38px;
-    line-height: 1.25;
-  }
 }
 
 @media (max-width: 768px) {
@@ -217,5 +212,10 @@
   .work-hero-heading {
     font-size: 24px;
     line-height: 32px;
+  }
+
+  .work-hero-heading {
+    font-size: 38px;
+    line-height: 1.25;
   }
 }

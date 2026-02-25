@@ -1,0 +1,197 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap");
+
+/* Project content – premium editorial, no cards (Awwwards-level) */
+.project-content {
+  padding: 4rem 0 5rem;
+  background: #fff;
+  color: #0a0a0a;
+}
+
+.project-content-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+}
+
+/* Content grid matches header width (same max-width as project-scene-inner) */
+.project-content-column {
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.project-content-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Sections as simple editorial blocks – no cards */
+.project-content-section {
+  margin-bottom: 0;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: transparent;
+}
+
+.project-content-section:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.project-content-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Section headings – clean editorial */
+.project-content-heading {
+  font-family: "Urbanist", sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #666;
+  margin: 0 0 1rem;
+  line-height: 1.3;
+}
+
+/* Premium body text – award-winning readability */
+.project-content-text {
+  font-family: "Urbanist", sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  letter-spacing: 0.015em;
+  color: #1a1a1a;
+  margin: 0 0 0.875rem;
+}
+
+.project-content-text:last-child {
+  margin-bottom: 0;
+}
+
+.project-content-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+}
+
+.project-content-list li {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  letter-spacing: 0.015em;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.project-content-list li::before {
+  content: "·";
+  color: #999;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* Process steps – editorial, no cards */
+.project-content-step {
+  margin-bottom: 0;
+}
+
+.project-content-steps {
+  margin-top: 0;
+  padding-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.project-content-step:last-child {
+  margin-bottom: 0;
+}
+
+.project-content-step-heading {
+  font-family: "Urbanist", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #111;
+  margin: 0 0 0.875rem;
+}
+
+.project-content-step-image-wrap {
+  border-radius: 42px;
+  overflow: hidden;
+  border: none;
+  background: #f6f6f7;
+  box-shadow: none;
+}
+
+.project-content-step-image-wrap:hover {
+  box-shadow: none;
+}
+
+.project-content-step-image-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  background: #fafbfc;
+}
+
+/* Key solutions – simple grid, no cards */
+.project-content-solutions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem 2.5rem;
+}
+
+.project-content-solution-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.project-content-solution-title {
+  font-family: "Urbanist", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #111;
+  margin: 0 0 0.5rem;
+}
+
+.project-content-solution-desc {
+  font-size: 1rem;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  color: #333;
+  margin: 0 0 0.6rem;
+}
+
+.project-content-solution-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.project-content-solution-list li {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: #333;
+  margin-bottom: 0.35rem;
+}
+
+.project-content-solution-list li::before {
+  content: "·";
+  color: #999;
+  flex-shrink: 0;
+}

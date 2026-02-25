@@ -1,52 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  MYLONE,
-  KAASHIN,
-  AUCTOSELLERAPP,
-  ELRIADSHRINE,
-  PEPSI,
-  DINGG,
-} from "../data/projectContent";
-
-const WORK_PROJECTS = [
-  {
-    ...ELRIADSHRINE,
-    landingTitle: "Simplifying a high-traffic ticket booking experience to reduce drop-offs",
-    path: "ELRIADSHRINE",
-    cardBg: "#F8F9FB",
-  },
-  {
-    ...AUCTOSELLERAPP,
-    landingTitle: "A mobile-first seller app for managing high-volume auction workflows",
-    path: "AUCTOSELLERAPP",
-    cardBg: "#F0F4FF",
-  },
-  {
-    ...PEPSI,
-    landingTitle: "An enterprise dashboard enabling faster, data-driven deal decisions",
-    path: "PEPSI",
-    cardBg: "#EEF2FF",
-  },
-  {
-    ...DINGG,
-    landingTitle: "An end-to-end SaaS platform for managing salon operations and growth",
-    path: "DINGG",
-    cardBg: "#FAFAFA",
-  },
-  {
-    ...MYLONE,
-    landingTitle: MYLONE.title,
-    path: "MYLONE",
-    cardBg: "#F8F9FB",
-  },
-  {
-    ...KAASHIN,
-    landingTitle: KAASHIN.title,
-    path: "KAASHIN",
-    cardBg: "#F0F4FF",
-  },
-];
+import { WORK_PROJECTS } from "../data/workProjects";
 
 const WorkHero = () => {
   const navigate = useNavigate();
@@ -98,17 +52,20 @@ const WorkHero = () => {
                 onClick={() => navigate(`/work/${project.path}`)}
                 className="project-card group cursor-pointer w-full text-left bg-transparent border-0 p-0 rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent focus-visible:ring-offset-2"
               >
-                <div className="relative overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 ease-out hover:shadow-md hover:border-gray-200">
+                <div className="relative overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 ease-out hover:shadow-lg hover:shadow-gray-200/60 hover:border-gray-200">
                   <div className="relative overflow-hidden rounded-t-2xl aspect-[4/3] flex items-center justify-center p-8 bg-[#FAFAFA]">
                     <img
                       alt={`${project.company} Project`}
-                      className="w-full h-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                      className="w-full h-full object-contain transition-transform duration-300 ease-out group-hover:scale-[1.02]"
                       src={project.image}
                     />
-                    <div className="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-white/90 shadow-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 border border-brand-accent/20">
-                      <svg className="w-4 h-4 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
+                    <div className="absolute bottom-4 right-4 flex items-center gap-2 rounded-full bg-white px-4 py-2.5 shadow-md border border-gray-100 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">
+                      <span className="text-sm font-medium text-gray-700">View case</span>
+                      <span className="w-8 h-8 rounded-full bg-brand-accent flex items-center justify-center flex-shrink-0">
+                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </span>
                     </div>
                   </div>
                   <div className="px-6 py-5">

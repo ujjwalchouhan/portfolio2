@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Lenis + GSAP ScrollTrigger compatibility */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
 body {
   margin: 0;
   font-family: Inter, sans-serif;
@@ -14,11 +24,21 @@ body {
   .glass-nav {
     background: rgba(18, 18, 18, 0.8);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
-  .project-card:hover img {
-    transform: scale(1.02);
+  .glass-nav-blur {
+    background: rgba(12, 12, 12, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
+  .nav-link-active {
+    color: #fff !important;
+    background: rgba(255, 102, 36, 0.2);
+    padding: 6px 14px;
+    border-radius: 9999px;
+  }
+  /* Image scale on hover handled by group-hover:scale-[1.02] in card components */
   .text-balance {
     text-wrap: balance;
   }
@@ -28,16 +48,6 @@ body {
       #222222 0%,
       #0a0a0a 70%
     );
-  }
-}
-
-/* Hero icon infinite scroll — 4 repeated strips, so move by 25% per loop */
-@keyframes hero-icon-scroll {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-25%, 0, 0);
   }
 }
 
@@ -51,26 +61,66 @@ body {
   animation-play-state: paused;
 }
 
-/* Smooth fade at left/right edges so icons start and end softly */
+/* Edge fade – smooth fade-in left, fade-out right; mask on inner so it matches content edge */
 .hero-icon-scroller-mask {
   mask-image: linear-gradient(
     to right,
     transparent 0,
-    black 8%,
-    black 92%,
+    transparent 1%,
+    rgba(0, 0, 0, 0.06) 4%,
+    rgba(0, 0, 0, 0.18) 10%,
+    rgba(0, 0, 0, 0.35) 16%,
+    rgba(0, 0, 0, 0.55) 22%,
+    rgba(0, 0, 0, 0.75) 28%,
+    black 34%,
+    black 66%,
+    rgba(0, 0, 0, 0.75) 72%,
+    rgba(0, 0, 0, 0.55) 78%,
+    rgba(0, 0, 0, 0.35) 84%,
+    rgba(0, 0, 0, 0.18) 90%,
+    rgba(0, 0, 0, 0.06) 96%,
+    transparent 99%,
     transparent 100%
   );
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0,
-    black 8%,
-    black 92%,
+    transparent 1%,
+    rgba(0, 0, 0, 0.06) 4%,
+    rgba(0, 0, 0, 0.18) 10%,
+    rgba(0, 0, 0, 0.35) 16%,
+    rgba(0, 0, 0, 0.55) 22%,
+    rgba(0, 0, 0, 0.75) 28%,
+    black 34%,
+    black 66%,
+    rgba(0, 0, 0, 0.75) 72%,
+    rgba(0, 0, 0, 0.55) 78%,
+    rgba(0, 0, 0, 0.35) 84%,
+    rgba(0, 0, 0, 0.18) 90%,
+    rgba(0, 0, 0, 0.06) 96%,
+    transparent 99%,
     transparent 100%
   );
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  mask-position: 0 0;
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: 0 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-icon-scroll-track {
     animation: none;
+  }
+}
+
+/* Hero icon infinite scroll — 4 repeated strips, so move by 25% per loop */
+@keyframes hero-icon-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-25%, 0, 0);
   }
 }
