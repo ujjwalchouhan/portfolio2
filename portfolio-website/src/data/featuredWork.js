@@ -3,7 +3,7 @@ import {
   AUCTOSELLERAPP,
   PEPSI,
   DINGG,
-  KAASHIN,
+  CANBIZ,
   MYLONE,
 } from "./projectContent";
 
@@ -41,11 +41,11 @@ export const FEATURED_PROJECTS = [
     size: "large",
   },
   {
-    ...KAASHIN,
-    path: "KAASHIN",
-    cardBg: "#FAFAFA",
-    outcome: "Brand identity embodying Varanasi's serene essence",
-    tags: ["Brand", "Logo", "Hospitality"],
+    ...CANBIZ,
+    path: "CANBIZ",
+    cardBg: "#F5F5F5",
+    outcome: "Modern BMC platform with mobile-optimized UI and clear onboarding",
+    tags: ["Mobile", "SaaS", "Dashboard"],
     size: "large",
   },
   {
