@@ -102,7 +102,7 @@ export default function FeaturedWork() {
     >
       <div className="container">
         <header className="featured-work-header">
-          <span className="featured-work-label">Work</span>
+          <span className="featured-work-label">Works</span>
           <h2 className="featured-work-title">
             Explore my design work and process
           </h2>
@@ -149,26 +149,11 @@ const FeaturedCard = React.forwardRef(
       .filter(Boolean)
       .join(" ");
 
-    /* 3-col grid: row1 [large, small], row2 [small, large], row3 [large, small] */
-    const gridColumns = [
-      "1 / 3",   /* 0 large */
-      "3 / 4",   /* 1 small */
-      "1 / 2",   /* 2 small */
-      "2 / 4",   /* 3 large */
-      "1 / 3",   /* 4 large */
-      "3 / 4",   /* 5 small */
-    ];
-    const gridColumn = gridColumns[index] ?? "1 / 4";
-
+    /* Figma: 2-col grid, equal cards – no column span */
     return (
       <article
         ref={ref}
         className={cardClass}
-        style={
-          typeof window !== "undefined" && window.matchMedia("(min-width: 769px)").matches
-            ? { gridColumn }
-            : undefined
-        }
         onMouseEnter={onActivate}
         onMouseLeave={onDeactivate}
         onClick={(e) => {
@@ -201,11 +186,6 @@ const FeaturedCard = React.forwardRef(
             </div>
           </div>
           <div className="featured-work-card-content">
-            <div className="featured-work-card-tags">
-              {project.tags.map((tag) => (
-                <span key={tag}>{tag}</span>
-              ))}
-            </div>
             <p className="featured-work-card-company">
               <span>{`{ `}</span>
               {project.company}

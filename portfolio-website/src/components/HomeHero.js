@@ -12,8 +12,6 @@ import { useScroll } from "../context/ScrollContext";
 import { useHeroScene } from "../context/HeroSceneContext";
 import "../styles/HomeHero.css";
 
-const TITLE_WORDS = ["AI-Driven", "UI/UX", "Designer"];
-const TITLE_WORD_STRENGTHS = { "AI-Driven": 1.4, "UI/UX": 1.0, Designer: 0.7 };
 const SCROLL_TRANSITION_THRESHOLD = 300;
 
 function useReducedMotion() {
@@ -32,30 +30,24 @@ const HomeHero = () => {
   const heroRef = useRef(null);
   const introRef = useRef(null);
   const titleWrapRef = useRef(null);
-  const wordRefs = useRef([]);
   const descRef = useRef(null);
   const ctaRef = useRef(null);
   const btnViewRef = useRef(null);
   const btnResumeRef = useRef(null);
   const iconsWrapRef = useRef(null);
-  const quickTosRef = useRef([]);
   const heroScrollStateRef = useRef("visible");
 
   const { scrollY } = useScroll();
   const heroScrollProgress = Math.min(1, scrollY / SCROLL_TRANSITION_THRESHOLD);
-  const { mousePosition, registerHeroRefs } = useHeroScene();
+  const { registerHeroRefs } = useHeroScene();
   const reducedMotion = useReducedMotion();
-
-  const setWordRef = useCallback((el, i) => {
-    wordRefs.current[i] = el;
-  }, []);
 
   // Register hero refs for shared timeline (no separate entrance – handled by HomeScene)
   useLayoutEffect(() => {
     registerHeroRefs({
       greeting: introRef,
       titleWrap: titleWrapRef,
-      words: wordRefs,
+      words: { current: [] },
       desc: descRef,
       btnView: btnViewRef,
       btnResume: btnResumeRef,
@@ -87,53 +79,6 @@ const HomeHero = () => {
       gsap.to(descRef.current, { y: 0, opacity: 1, duration: 0.6, ease: "power3.inOut" });
     }
   }, [scrollY, reducedMotion]);
-
-  // Magnetic typography – per-word strength, non-linear falloff, velocity damping
-  useEffect(() => {
-    const hero = heroRef.current;
-    if (!hero || reducedMotion || !wordRefs.current.length) return;
-    const words = wordRefs.current.filter(Boolean);
-    if (!words.length) return;
-    const quickTos = words.map((el) => {
-      const qx = gsap.quickTo(el, "x", { duration: 0.5, ease: "power2.out" });
-      const qy = gsap.quickTo(el, "y", { duration: 0.5, ease: "power2.out" });
-      return { x: qx, y: qy };
-    });
-    quickTosRef.current = quickTos;
-    let rafId;
-    const update = () => {
-      const mp = mousePosition.current;
-      const rect = hero.getBoundingClientRect();
-      const mx = mp.inside ? mp.clientX - rect.left - rect.width / 2 : 0;
-      const my = mp.inside ? mp.clientY - rect.top - rect.height / 2 : 0;
-      const speed = Math.hypot(mp.vx || 0, mp.vy || 0);
-      const velDamp = Math.max(0.3, 1 - speed / 800);
-      words.forEach((el, i) => {
-        if (!quickTos[i]) return;
-        const wr = el.getBoundingClientRect();
-        const wx = wr.left + wr.width / 2 - (rect.left + rect.width / 2);
-        const wy = wr.top + wr.height / 2 - (rect.top + rect.height / 2);
-        const dx = mx - wx;
-        const dy = my - wy;
-        const dist = Math.hypot(dx, dy) || 1;
-        const range = 220;
-        const normalizedDist = Math.min(1, dist / range);
-        const falloff = 1 - Math.pow(normalizedDist, 1.5);
-        const strength = TITLE_WORD_STRENGTHS[TITLE_WORDS[i]] ?? 1.0;
-        const amount = falloff * strength * velDamp * Math.min(dist, 36);
-        const tx = mp.inside ? (dx / dist) * amount : 0;
-        const ty = mp.inside ? (dy / dist) * amount : 0;
-        quickTos[i].x(tx);
-        quickTos[i].y(ty);
-      });
-      rafId = requestAnimationFrame(update);
-    };
-    rafId = requestAnimationFrame(update);
-    return () => {
-      if (rafId) cancelAnimationFrame(rafId);
-      quickTos.forEach((q) => { q.x(0); q.y(0); });
-    };
-  }, [mousePosition, reducedMotion]);
 
   // CTA decision physics: hover shadow+scale, hold 700ms → highlight sweep, click → timeScale
   const btnHoveredRef = useRef({ view: false, resume: false });
@@ -213,34 +158,27 @@ const HomeHero = () => {
       <div className="home-hero-noise pointer-events-none" aria-hidden="true" />
 
       <div className="container mx-auto px-6 text-center z-10 relative">
-        <p
-          ref={introRef}
-          className="home-hero-intro text-xl md:text-2xl font-light text-gray-400 mb-4"
-        >
-          Hey, <span className="font-serif italic text-white">I&apos;m Abhay.</span>
-        </p>
-        <h1
-          ref={titleWrapRef}
-          className="home-hero-title text-5xl md:text-8xl font-serif mb-8 text-balance leading-tight"
-        >
-          {TITLE_WORDS.map((word, i) => (
-            <span
-              key={i}
-              ref={(el) => setWordRef(el, i)}
-              className="home-hero-title-word inline-block mr-[0.2em]"
-              style={{ willChange: "transform" }}
-            >
-              {word}
+        {/* Frame 20: flex column, align center, gap 36px, max-width 780px */}
+        <div className="home-hero-frame">
+          <h1
+            ref={titleWrapRef}
+            className="home-hero-headline"
+          >
+            <span ref={introRef} className="home-hero-headline-line1">
+              Hey, <span className="home-hero-name">I&apos;m Abhay.</span>
             </span>
-          ))}
-        </h1>
-        <p
-          ref={descRef}
-          className="home-hero-desc max-w-xl mx-auto text-gray-400 text-lg md:text-xl mb-12 font-light"
-        >
-          I design intuitive, AI-powered digital experiences that simplify
-          complex problems and drive meaningful user adoption.
-        </p>
+            <span className="home-hero-headline-line2">
+              AI-Driven UI/UX Designer
+            </span>
+          </h1>
+          <p
+            ref={descRef}
+            className="home-hero-desc"
+          >
+            I design intuitive, AI-powered digital experiences that simplify
+            complex problems and drive meaningful user adoption.
+          </p>
+        </div>
         <div ref={ctaRef} className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             ref={btnViewRef}

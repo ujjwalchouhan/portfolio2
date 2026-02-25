@@ -15,9 +15,9 @@ const PROJECTS = FEATURED_PROJECTS.map((p) => ({
   label: (p.tags && p.tags[0]) || p.platform || p.company,
 }));
 
-const CARD_WIDTH = 280;
-const CARD_GAP = 24;
-const BASE_SPEED = 22; // px/s – calm, premium
+const CARD_WIDTH = 300;
+const CARD_GAP = 20;
+const BASE_SPEED = 48; // px/s – faster scroll
 const LERP = 0.035; // interpolation – smooth, no abrupt changes
 
 // Subtle vertical offset – minimal depth (max ±3px)

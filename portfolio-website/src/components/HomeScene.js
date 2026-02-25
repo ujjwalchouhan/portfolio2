@@ -74,16 +74,13 @@ export default function HomeScene() {
     const nl = nav?.logo?.current;
     const linksArr = nav?.links?.current;
     const links = Array.isArray(linksArr) ? linksArr.filter(Boolean) : [];
-    const gh = hero?.greeting?.current;
-    const words = (hero?.words?.current && Array.isArray(hero.words.current))
-      ? hero.words.current.filter(Boolean)
-      : [];
+    const titleWrap = hero?.titleWrap?.current;
     const desc = hero?.desc?.current;
     const btnView = hero?.btnView?.current;
     const btnResume = hero?.btnResume?.current;
     const icons = hero?.icons?.current;
 
-    if (!nc || !gh) return;
+    if (!nc || !titleWrap) return;
     timelineRunRef.current = true;
 
     const tl = gsap.timeline({ ease: "power3.out" });
@@ -95,14 +92,8 @@ export default function HomeScene() {
         { opacity: 1, y: 0, duration: 0.45, stagger: 0.06, ease: "power2.out" },
         0.35
       )
-      .fromTo(gh, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.6 }, 0.5)
-      .fromTo(
-        words,
-        { opacity: 0, y: 24 },
-        { opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: "power3.out" },
-        0.7
-      )
-      .fromTo(desc, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7 }, 1)
+      .fromTo(titleWrap, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.5)
+      .fromTo(desc, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7 }, 0.9)
       .fromTo(
         [btnView, btnResume],
         { opacity: 0, scale: 0.92 },

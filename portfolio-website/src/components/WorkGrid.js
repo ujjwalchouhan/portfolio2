@@ -82,11 +82,6 @@ const WorkCard = React.forwardRef(
           </div>
         </div>
         <div className="work-grid-card-content">
-          <div className="work-grid-card-tags">
-            {project.tags?.map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
-          </div>
           <p className="work-grid-card-company">
             <span>{`{ `}</span>
             {project.company}

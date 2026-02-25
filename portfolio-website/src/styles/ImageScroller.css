@@ -58,44 +58,31 @@
   letter-spacing: 0.2em;
 }
 
-/* Edge fade – minimalistic: short, clean trim */
+/* No edge fade – hard clip; strip height 225px (Component 3) */
 .scroller-mask {
   position: relative;
   overflow: hidden;
   padding: 48px 0 56px;
-  mask-image: linear-gradient(
-    to right,
-    transparent 0,
-    black 56px,
-    black calc(100% - 56px),
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0,
-    black 56px,
-    black calc(100% - 56px),
-    transparent 100%
-  );
-  mask-size: 100% 100%;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
+  min-height: 225px;
 }
 
 .scroller-track {
   display: flex;
   flex-shrink: 0;
+  align-items: center;
+  height: 225px;
   will-change: transform;
   backface-visibility: hidden;
   transform: translate3d(0, 0, 0);
 }
 
-/* Card – minimal, premium, theme-aligned */
+/* Component 3 – Frame 3920: 300×225px, #FFFFFF, border-radius 4px */
 .scroller-card {
   flex-shrink: 0;
+  width: 300px;
+  height: 225px;
   cursor: pointer;
-  border-radius: 16px;
+  border-radius: 4px;
   overflow: hidden;
   transition:
     transform 0.4s cubic-bezier(0.33, 1, 0.68, 1),
@@ -106,8 +93,8 @@
 .scroller-card--hovered {
   transform: scale(1.03) translate3d(0, var(--parallax-y, 0), 0) !important;
   box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.04),
-    0 16px 40px -8px rgba(0, 0, 0, 0.08);
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    0 12px 32px -8px rgba(0, 0, 0, 0.1);
   z-index: 2;
 }
 
@@ -118,39 +105,28 @@
 .scroller-card-inner {
   display: flex;
   flex-direction: column;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 16px;
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF;
+  border-radius: 4px;
   overflow: hidden;
-  transition: border-color 0.4s cubic-bezier(0.33, 1, 0.68, 1),
-    box-shadow 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+  transition: box-shadow 0.4s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .scroller-card--hovered .scroller-card-inner {
-  border-color: rgba(0, 0, 0, 0.08);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
-.scroller-card--center:not(.scroller-card--dimmed):not(.scroller-card--hovered) .scroller-card-inner {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-}
-
-.scroller-card--center:not(.scroller-card--dimmed):not(.scroller-card--hovered) {
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.03),
-    0 8px 24px -4px rgba(0, 0, 0, 0.05);
-}
-
-/* Image area */
+/* Image area – fills frame 300×225 */
 .scroller-card-image-wrap {
   position: relative;
-  aspect-ratio: 4 / 3;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.25rem;
-  min-height: 0;
-  background: inherit;
+  background: #FFFFFF;
 }
 
 .scroller-card-image {
@@ -178,21 +154,9 @@
   filter: blur(0) brightness(1.02);
 }
 
-/* Label – minimal typography */
+/* Label – hidden to match Figma Component 3 (image-only frames) */
 .scroller-card-label {
-  margin: 0.625rem 0 0;
-  padding: 0 1rem;
-  font-family: "Urbanist", sans-serif;
-  font-size: 0.6875rem;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.45);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  text-align: center;
-}
-
-.scroller-card--hovered .scroller-card-label {
-  color: rgba(0, 0, 0, 0.6);
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

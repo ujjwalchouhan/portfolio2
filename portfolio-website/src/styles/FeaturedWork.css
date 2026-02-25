@@ -1,61 +1,62 @@
 @import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@600&family=Outfit:wght@500&display=swap");
 
-/* Section – ultra-premium alignment */
+/* Section – Home background #F9F9F9, wider container for card grid */
 .featured-work {
   padding: 5.5rem 0 6.5rem;
-  background: #fafafa;
-  color: #0a0a0a;
+  background: #F9F9F9;
+  color: #0E1015;
 }
 
 .featured-work .container {
-  max-width: 1280px;
+  max-width: 1320px;
   margin: 0 auto;
-  padding: 0 clamp(1.5rem, 5vw, 2.5rem);
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
 }
 
+/* Frame 3863 – Works heading: label 28px/44px #F5581E, gap 2px, title 46px/55px #0E1015 */
 .featured-work-header {
-  margin-bottom: 3.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  margin-bottom: 3rem;
 }
 
 .featured-work-label {
-  font-size: 0.6875rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: #f94c0c;
+  font-family: "Urbanist", sans-serif;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 44px;
+  color: #F5581E;
 }
 
 .featured-work-title {
   font-family: "Urbanist", sans-serif;
-  font-size: clamp(1.875rem, 4vw, 2.5rem);
-  font-weight: 500;
-  color: #0a0a0a;
-  margin: 0.75rem 0 0;
-  letter-spacing: -0.03em;
-  line-height: 1.2;
+  font-weight: 600;
+  font-size: clamp(1.75rem, 4vw, 46px);
+  line-height: 55px;
+  color: #0E1015;
+  margin: 0;
 }
 
-/* 3-col grid: rows of [large, small] / [small, large] / [large, small] */
+/* Frame 3925 – 2 cols, gap 30px, cards 570×580; card: rgba(255,255,255,0.7), 4px #FFF, 24px radius */
 .featured-work-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
+  grid-template-columns: repeat(2, 1fr);
   align-items: stretch;
-}
-
-@media (max-width: 768px) {
-  .featured-work-grid {
-    grid-template-columns: 1fr;
-  }
+  gap: 30px;
 }
 
 .featured-work-card {
   position: relative;
-  border-radius: 20px;
+  width: 100%;
+  min-height: 580px;
+  border-radius: 24px;
   overflow: hidden;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  background: rgba(255, 255, 255, 0.7);
+  border: 4px solid #FFFFFF;
+  box-shadow: none;
   transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1),
@@ -70,18 +71,19 @@
 
 .featured-work-card.featured-work-card--active {
   transform: scale(1.015);
-  box-shadow: 0 28px 56px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
-  border-color: rgba(0, 0, 0, 0.06);
+  box-shadow: 0px 6px 24px rgba(245, 88, 30, 0.1);
+  border-color: #FFFFFF;
   z-index: 2;
 }
 
 .featured-work-card-inner {
   height: 100%;
+  min-height: 580px;
   display: flex;
   flex-direction: column;
 }
 
-/* Image area – equal padding on all sides for consistent, premium spacing */
+/* Lockable snap – image area border-radius 16px */
 .featured-work-card-image-wrap {
   position: relative;
   overflow: hidden;
@@ -90,12 +92,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 24px;
+  border-radius: 16px;
+  margin: 24px 24px 0;
 }
 
 .featured-work-card--large .featured-work-card-image-wrap {
   min-height: 280px;
-  padding: 2rem;
+  padding: 24px;
 }
 
 .featured-work-card-image-mask {
@@ -104,9 +108,9 @@
   background: linear-gradient(to right, transparent 0%, transparent 0%);
   z-index: 1;
   pointer-events: none;
+  border-radius: 16px;
 }
 
-/* Inner frame: fixed aspect so space from wrap is equal on all sides; image scales inside */
 .featured-work-card-image-frame {
   position: relative;
   z-index: 0;
@@ -134,12 +138,12 @@
   transform: scale(1.05);
 }
 
-/* Content – premium typography */
+/* Frame 3913 – category Manrope 600 19.125px #F5581E braces, Outfit 500 20px #272727; heading Outfit 500 26px/34px #0E1015 */
 .featured-work-card-content {
-  padding: 1.35rem 1.5rem 1.5rem;
+  padding: 20px 24px 24px;
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 10px;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -159,20 +163,31 @@
 }
 
 .featured-work-card-company {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: #0a0a0a;
-  letter-spacing: -0.01em;
+  font-family: "Outfit", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 20px;
+  color: #272727;
+  letter-spacing: -0.765px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
 }
 
 .featured-work-card-company span {
-  color: #f94c0c;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 19.125px;
+  line-height: 19px;
+  color: #F5581E;
 }
 
 .featured-work-card-outcome {
-  font-size: 0.9375rem;
-  line-height: 1.45;
-  color: #444;
+  font-family: "Outfit", sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 34px;
+  color: #0E1015;
   letter-spacing: 0.01em;
 }
 
@@ -301,6 +316,21 @@
 
 .featured-work-more-btn:hover .featured-work-more-cursor {
   opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .featured-work-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-work-card-inner {
+    min-height: auto;
+  }
+
+  .featured-work-card-outcome {
+    font-size: 22px;
+    line-height: 30px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

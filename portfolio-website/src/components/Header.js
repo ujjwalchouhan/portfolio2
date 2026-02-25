@@ -49,8 +49,8 @@ const Header = () => {
       data-purpose="main-navigation"
     >
       <div className={`glass-nav rounded-full px-6 py-3 flex items-center justify-between ${navScrolled ? "glass-nav-blur" : ""}`}>
-        <Link to="/" className="flex items-center no-underline" aria-label="Home">
-          <img src={logo} alt="" className="w-10 h-10 object-contain"  style={{width: '100px'}}/>
+        <Link to="/" className="flex items-center gap-2 no-underline text-white" aria-label="Home">
+          <img src={logo} alt="" className="object-contain flex-shrink-0" style={{ width: "100px", height: "auto" }} />
         </Link>
         <ul className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
           <NavLinks onNavigate={undefined} activeSection={activeSection} />

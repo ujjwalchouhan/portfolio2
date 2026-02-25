@@ -116,42 +116,8 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="footer-legal mt-20 pt-10 border-t border-white/[0.06] flex flex-col md:flex-row md:items-center justify-between gap-6 text-xs">
+        <div className="footer-legal mt-20 pt-10 border-t border-white/[0.06] flex flex-col items-center justify-center text-center text-xs">
           <p className="footer-legal-text">Thank you for visiting my portfolio. This site is designed by me.</p>
-          <nav className="footer-socials flex items-center gap-6" aria-label="Social links">
-            <a
-              className="footer-social-link uppercase tracking-widest text-inherit no-underline"
-              href="https://dribbble.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Dribbble
-            </a>
-            <a
-              className="footer-social-link uppercase tracking-widest text-inherit no-underline"
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              LinkedIn
-            </a>
-            <a
-              className="footer-social-link uppercase tracking-widest text-inherit no-underline"
-              href="https://behance.net"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Behance
-            </a>
-            <a
-              className="footer-social-link uppercase tracking-widest text-inherit no-underline"
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Instagram
-            </a>
-          </nav>
         </div>
       </div>
     </footer>
